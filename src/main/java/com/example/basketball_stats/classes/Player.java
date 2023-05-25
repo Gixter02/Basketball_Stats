@@ -3,20 +3,20 @@ package com.example.basketball_stats.classes;
 import javafx.beans.property.IntegerProperty;
 
 public class Player extends Person {
-    private final IntegerProperty fouls;
-    private final IntegerProperty defensiveRebounds;
-    private final IntegerProperty offensiveRebounds;
-    private final IntegerProperty steals;
-    private final IntegerProperty turnOver;
-    private final IntegerProperty assists;
-    private final IntegerProperty blocks;
-    private final IntegerProperty madeFreeThrows;
-    private final IntegerProperty attemptedFreeThrows;
-    private final IntegerProperty madeTwoPointers;
-    private final IntegerProperty attemptedTwoPointers;
-    private final IntegerProperty madeThreePointers;
-    private final IntegerProperty attemptedThreePointers;
-    private final IntegerProperty minutesPlayed;
+    private IntegerProperty fouls;
+    private IntegerProperty defensiveRebounds;
+    private IntegerProperty offensiveRebounds;
+    private IntegerProperty steals;
+    private IntegerProperty turnOver;
+    private IntegerProperty assists;
+    private IntegerProperty blocks;
+    private IntegerProperty madeFreeThrows;
+    private IntegerProperty attemptedFreeThrows;
+    private IntegerProperty madeTwoPointers;
+    private IntegerProperty attemptedTwoPointers;
+    private IntegerProperty madeThreePointers;
+    private IntegerProperty attemptedThreePointers;
+    private IntegerProperty minutesPlayed;
 
     /**
      * Costruttore di player che ha come superclass constructor il costruttore con solo firstname e lastname. Poi farò altri costruttori quando li capirò meglio.
