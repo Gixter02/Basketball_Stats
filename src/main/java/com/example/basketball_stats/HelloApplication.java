@@ -13,7 +13,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+        stage.setTitle("Basketball Stats");
         stage.getIcons().add(new Image("com/example/basketball_stats/images/basketball_ball.png"));
         stage.setScene(scene);
         stage.setResizable(false);
