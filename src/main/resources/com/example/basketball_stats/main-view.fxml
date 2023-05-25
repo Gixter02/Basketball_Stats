@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.basketball_stats.HelloController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <left>
+      <ImageView fitHeight="339.0" fitWidth="401.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@images/Basketabll_half_court.png" />
+         </image>
+      </ImageView>
+   </left>
+   <right>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <AnchorPane prefHeight="375.0" prefWidth="183.0">
+               <children>
+                  <ComboBox fx:id="quarterComboBox" layoutX="14.0" layoutY="14.0" onAction="#selectQuarter" />
+                  <Label layoutX="14.0" layoutY="58.0" text="2P :" />
+                  <Label layoutX="14.0" layoutY="83.0" text="3P :" />
+                  <Label layoutX="14.0" layoutY="110.0" text="Free Throws :" />
+                  <Label layoutX="14.0" layoutY="136.0" text="OR :" />
+                  <Label layoutX="14.0" layoutY="162.0" text="DR :" />
+                  <Label layoutX="14.0" layoutY="188.0" text="Steals :" />
+                  <Label layoutX="14.0" layoutY="213.0" text="Turn Over :" />
+                  <Label layoutX="15.0" layoutY="239.0" text="Assists :" />
+                  <Label layoutX="16.0" layoutY="264.0" text="Blocks :" />
+                  <ComboBox fx:id="filterBox" layoutX="89.0" layoutY="14.0" onAction="#filterData" />
+                  <Label layoutX="43.0" layoutY="58.0" text="Label" />
+                  <Label layoutX="42.0" layoutY="83.0" text="Label" />
+                  <Label layoutX="86.0" layoutY="110.0" text="Label" />
+                  <Label layoutX="42.0" layoutY="136.0" text="Label" />
+                  <Label layoutX="43.0" layoutY="162.0" text="Label" />
+                  <Label layoutX="56.0" layoutY="188.0" text="Label" />
+                  <Label layoutX="84.0" layoutY="213.0" text="Label" />
+                  <Label layoutX="59.0" layoutY="239.0" text="Label" />
+                  <Label layoutX="58.0" layoutY="264.0" text="Label" />
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </right>
+</BorderPane>
