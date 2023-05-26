@@ -3,6 +3,7 @@ package com.example.basketball_stats.classes;
 import javafx.beans.property.IntegerProperty;
 
 public class Player extends Person {
+    private IntegerProperty playerNumber;
     private IntegerProperty fouls;
     private IntegerProperty defensiveRebounds;
     private IntegerProperty offensiveRebounds;
@@ -17,6 +18,17 @@ public class Player extends Person {
     private IntegerProperty madeThreePointers;
     private IntegerProperty attemptedThreePointers;
     private IntegerProperty minutesPlayed;
+
+    /**
+     * This will be the most used constructor, as it will be called to insert all the players
+     * @param firstName name of the player
+     * @param lastName lastname of the player
+     * @param playerNumber number of the player
+     */
+    public Player(String firstName, String lastName, IntegerProperty playerNumber) {
+        super(firstName, lastName);
+        this.playerNumber = playerNumber;
+    }
 
     /**
      * Costruttore di player che ha come superclass constructor il costruttore con solo firstname e lastname. Poi farò altri costruttori quando li capirò meglio.
@@ -39,8 +51,29 @@ public class Player extends Person {
         this.minutesPlayed = minutesPlayed;
     }
 
+
+
     /**
      * Getters and setters
+     */
+
+    /**
+     * playerNumber
+     */
+    public int getPlayerNumber() {
+        return playerNumber.get();
+    }
+
+    public IntegerProperty playerNumberProperty() {
+        return playerNumber;
+    }
+
+    public void setPlayerNumber(int playerNumber) {
+        this.playerNumber.set(playerNumber);
+    }
+
+    /**
+     * fouls
      */
     public int getFouls() {
         return fouls.get();
@@ -54,6 +87,9 @@ public class Player extends Person {
         this.fouls.set(fouls);
     }
 
+    /**
+     * defensiveRebounds
+     */
     public int getDefensiveRebounds() {
         return defensiveRebounds.get();
     }
@@ -66,6 +102,9 @@ public class Player extends Person {
         this.defensiveRebounds.set(defensiveRebounds);
     }
 
+    /**
+     * offensiveRebounds
+     */
     public int getOffensiveRebounds() {
         return offensiveRebounds.get();
     }
@@ -78,6 +117,9 @@ public class Player extends Person {
         this.offensiveRebounds.set(offensiveRebounds);
     }
 
+    /**
+     * steals
+     */
     public int getSteals() {
         return steals.get();
     }
@@ -90,6 +132,9 @@ public class Player extends Person {
         this.steals.set(steals);
     }
 
+    /**
+     * turnOver
+     */
     public int getTurnOver() {
         return turnOver.get();
     }
@@ -102,6 +147,9 @@ public class Player extends Person {
         this.turnOver.set(turnOver);
     }
 
+    /**
+     * assists
+     */
     public int getAssists() {
         return assists.get();
     }
@@ -114,6 +162,9 @@ public class Player extends Person {
         this.assists.set(assists);
     }
 
+    /**
+     * blocks
+     */
     public int getBlocks() {
         return blocks.get();
     }
@@ -126,6 +177,9 @@ public class Player extends Person {
         this.blocks.set(blocks);
     }
 
+    /**
+     * madeFreeThrows
+     */
     public int getMadeFreeThrows() {
         return madeFreeThrows.get();
     }
@@ -138,6 +192,9 @@ public class Player extends Person {
         this.madeFreeThrows.set(madeFreeThrows);
     }
 
+    /**
+     * attemptedFreeThrows
+     */
     public int getAttemptedFreeThrows() {
         return attemptedFreeThrows.get();
     }
@@ -150,6 +207,9 @@ public class Player extends Person {
         this.attemptedFreeThrows.set(attemptedFreeThrows);
     }
 
+    /**
+     * madeTwoPointers
+     */
     public int getMadeTwoPointers() {
         return madeTwoPointers.get();
     }
@@ -162,6 +222,9 @@ public class Player extends Person {
         this.madeTwoPointers.set(madeTwoPointers);
     }
 
+    /**
+     * attemptedTwoPointers
+     */
     public int getAttemptedTwoPointers() {
         return attemptedTwoPointers.get();
     }
@@ -174,6 +237,9 @@ public class Player extends Person {
         this.attemptedTwoPointers.set(attemptedTwoPointers);
     }
 
+    /**
+     * madeThreePointers
+     */
     public int getMadeThreePointers() {
         return madeThreePointers.get();
     }
@@ -186,6 +252,9 @@ public class Player extends Person {
         this.madeThreePointers.set(madeThreePointers);
     }
 
+    /**
+     * attemptedThreePointers
+     */
     public int getAttemptedThreePointers() {
         return attemptedThreePointers.get();
     }
@@ -198,6 +267,9 @@ public class Player extends Person {
         this.attemptedThreePointers.set(attemptedThreePointers);
     }
 
+    /**
+     * getMinutesPlayed
+     */
     public int getMinutesPlayed() {
         return minutesPlayed.get();
     }
