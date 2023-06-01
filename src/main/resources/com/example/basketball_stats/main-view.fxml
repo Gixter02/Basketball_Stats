@@ -93,7 +93,7 @@
    <center>
       <ImageView fx:id="courtImage" fitWidth="550.0" onMouseClicked="#handleClick" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <image>
-            <Image url="@images/Basketabll_half_court.png" />
+            <Image url="@images/halfcourt-transformed.jpeg" />
          </image>
       </ImageView>
    </center>
