@@ -8,12 +8,12 @@ public class OurEvent {
     private double y;
 
     /**
-     * Main constructor
-     * @param eventType
-     * @param whoDidIt
-     * @param quarter
-     * @param x
-     * @param y
+     * Full constructor
+     * @param eventType what
+     * @param whoDidIt who
+     * @param quarter when
+     * @param x where
+     * @param y where
      */
     public OurEvent(String eventType, String whoDidIt, String quarter, double x, double y) {
         this.eventType = eventType;
@@ -27,7 +27,6 @@ public class OurEvent {
     /*
      * Getters and setters
      */
-
     /**
      * eventType
      */

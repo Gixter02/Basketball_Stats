@@ -3,21 +3,21 @@ package com.example.basketball_stats.classes;
 import javafx.beans.property.IntegerProperty;
 
 public class Player extends Person {
-    private IntegerProperty playerNumber;
-    private IntegerProperty fouls;
-    private IntegerProperty defensiveRebounds;
-    private IntegerProperty offensiveRebounds;
-    private IntegerProperty steals;
-    private IntegerProperty turnOver;
-    private IntegerProperty assists;
-    private IntegerProperty blocks;
-    private IntegerProperty madeFreeThrows;
-    private IntegerProperty attemptedFreeThrows;
-    private IntegerProperty madeTwoPointers;
-    private IntegerProperty attemptedTwoPointers;
-    private IntegerProperty madeThreePointers;
-    private IntegerProperty attemptedThreePointers;
-    private IntegerProperty minutesPlayed;
+    private Integer playerNumber;
+    private Integer fouls;
+    private Integer defensiveRebounds;
+    private Integer offensiveRebounds;
+    private Integer steals;
+    private Integer turnOver;
+    private Integer assists;
+    private Integer blocks;
+    private Integer madeFreeThrows;
+    private Integer attemptedFreeThrows;
+    private Integer madeTwoPointers;
+    private Integer attemptedTwoPointers;
+    private Integer madeThreePointers;
+    private Integer attemptedThreePointers;
+    private Integer minutesPlayed;
 
     /**
      * This will be the most used constructor, as it will be called to insert all the players
@@ -25,7 +25,7 @@ public class Player extends Person {
      * @param lastName lastname of the player
      * @param playerNumber number of the player
      */
-    public Player(String firstName, String lastName, IntegerProperty playerNumber, IntegerProperty fouls, IntegerProperty defensiveRebounds, IntegerProperty offensiveRebounds, IntegerProperty steals, IntegerProperty turnOver, IntegerProperty assists, IntegerProperty blocks, IntegerProperty madeFreeThrows, IntegerProperty attemptedFreeThrows, IntegerProperty madeTwoPointers, IntegerProperty attemptedTwoPointers, IntegerProperty madeThreePointers, IntegerProperty attemptedThreePointers, IntegerProperty minutesPlayed) {
+    public Player(String firstName, String lastName, Integer playerNumber, Integer fouls, Integer defensiveRebounds, Integer offensiveRebounds, Integer steals, Integer turnOver, Integer assists, Integer blocks, Integer madeFreeThrows, Integer attemptedFreeThrows, Integer madeTwoPointers, Integer attemptedTwoPointers, Integer madeThreePointers, Integer attemptedThreePointers, Integer minutesPlayed) {
         super(firstName, lastName);
         this.playerNumber = playerNumber;
         this.fouls = null;
@@ -47,7 +47,7 @@ public class Player extends Person {
     /**
      * Costruttore di player che ha come superclass constructor il costruttore con solo firstname e lastname. Poi farò altri costruttori quando li capirò meglio.
      */
-    public Player(String firstName, String lastName, IntegerProperty fouls, IntegerProperty defensiveRebounds, IntegerProperty offensiveRebounds, IntegerProperty steals, IntegerProperty turnOver, IntegerProperty assists, IntegerProperty blocks, IntegerProperty madeFreeThrows, IntegerProperty attemptedFreeThrows, IntegerProperty madeTwoPointers, IntegerProperty attemptedTwoPointers, IntegerProperty madeThreePointers, IntegerProperty attemptedThreePointers, IntegerProperty minutesPlayed) {
+    public Player(String firstName, String lastName, Integer fouls, Integer defensiveRebounds, Integer offensiveRebounds, Integer steals, Integer turnOver, Integer assists, Integer blocks, Integer madeFreeThrows, Integer attemptedFreeThrows, Integer madeTwoPointers, Integer attemptedTwoPointers, Integer madeThreePointers, Integer attemptedThreePointers, Integer minutesPlayed) {
         super(firstName, lastName);
         this.fouls = fouls;
         this.defensiveRebounds = defensiveRebounds;
@@ -67,232 +67,172 @@ public class Player extends Person {
 
 
 
-    /**
+    /*
      * Getters and setters
      */
 
     /**
-     * playerNumber
+     * @return playerNumber
      */
-    public int getPlayerNumber() {
-        return playerNumber.get();
-    }
-
-    public IntegerProperty playerNumberProperty() {
+    public Integer getPlayerNumber() {
         return playerNumber;
     }
 
-    public void setPlayerNumber(int playerNumber) {
-        this.playerNumber.set(playerNumber);
+    public void setPlayerNumber(Integer playerNumber) {
+        this.playerNumber = playerNumber;
     }
 
     /**
-     * fouls
+     * @return fouls
      */
-    public int getFouls() {
-        return fouls.get();
-    }
-
-    public IntegerProperty foulsProperty() {
+    public Integer getFouls() {
         return fouls;
     }
 
-    public void setFouls(int fouls) {
-        this.fouls.set(fouls);
+    public void setFouls(Integer fouls) {
+        this.fouls = fouls;
     }
 
     /**
-     * defensiveRebounds
+     * @return defensiveRebounds
      */
-    public int getDefensiveRebounds() {
-        return defensiveRebounds.get();
-    }
-
-    public IntegerProperty defensiveReboundsProperty() {
+    public Integer getDefensiveRebounds() {
         return defensiveRebounds;
     }
 
-    public void setDefensiveRebounds(int defensiveRebounds) {
-        this.defensiveRebounds.set(defensiveRebounds);
+    public void setDefensiveRebounds(Integer defensiveRebounds) {
+        this.defensiveRebounds = defensiveRebounds;
     }
 
     /**
-     * offensiveRebounds
+     * @return offensiveRebounds
      */
-    public int getOffensiveRebounds() {
-        return offensiveRebounds.get();
-    }
-
-    public IntegerProperty offensiveReboundsProperty() {
+    public Integer getOffensiveRebounds() {
         return offensiveRebounds;
     }
 
-    public void setOffensiveRebounds(int offensiveRebounds) {
-        this.offensiveRebounds.set(offensiveRebounds);
+    public void setOffensiveRebounds(Integer offensiveRebounds) {
+        this.offensiveRebounds = offensiveRebounds;
     }
 
     /**
-     * steals
+     * @return steals
      */
-    public int getSteals() {
-        return steals.get();
-    }
-
-    public IntegerProperty stealsProperty() {
+    public Integer getSteals() {
         return steals;
     }
 
-    public void setSteals(int steals) {
-        this.steals.set(steals);
+    public void setSteals(Integer steals) {
+        this.steals = steals;
     }
 
     /**
-     * turnOver
+     * @return turnOver
      */
-    public int getTurnOver() {
-        return turnOver.get();
-    }
-
-    public IntegerProperty turnOverProperty() {
+    public Integer getTurnOver() {
         return turnOver;
     }
 
-    public void setTurnOver(int turnOver) {
-        this.turnOver.set(turnOver);
+    public void setTurnOver(Integer turnOver) {
+        this.turnOver = turnOver;
     }
 
     /**
-     * assists
+     * @return assists
      */
-    public int getAssists() {
-        return assists.get();
-    }
-
-    public IntegerProperty assistsProperty() {
+    public Integer getAssists() {
         return assists;
     }
 
-    public void setAssists(int assists) {
-        this.assists.set(assists);
+    public void setAssists(Integer assists) {
+        this.assists = assists;
     }
 
     /**
-     * blocks
+     * @return blocks
      */
-    public int getBlocks() {
-        return blocks.get();
-    }
-
-    public IntegerProperty blocksProperty() {
+    public Integer getBlocks() {
         return blocks;
     }
 
-    public void setBlocks(int blocks) {
-        this.blocks.set(blocks);
+    public void setBlocks(Integer blocks) {
+        this.blocks = blocks;
     }
 
     /**
-     * madeFreeThrows
+     * @return madeFreeThrows
      */
-    public int getMadeFreeThrows() {
-        return madeFreeThrows.get();
-    }
-
-    public IntegerProperty madeFreeThrowsProperty() {
+    public Integer getMadeFreeThrows() {
         return madeFreeThrows;
     }
 
-    public void setMadeFreeThrows(int madeFreeThrows) {
-        this.madeFreeThrows.set(madeFreeThrows);
+    public void setMadeFreeThrows(Integer madeFreeThrows) {
+        this.madeFreeThrows = madeFreeThrows;
     }
 
     /**
-     * attemptedFreeThrows
+     * @return attemptedFreeThrows
      */
-    public int getAttemptedFreeThrows() {
-        return attemptedFreeThrows.get();
-    }
-
-    public IntegerProperty attemptedFreeThrowsProperty() {
+    public Integer getAttemptedFreeThrows() {
         return attemptedFreeThrows;
     }
 
-    public void setAttemptedFreeThrows(int attemptedFreeThrows) {
-        this.attemptedFreeThrows.set(attemptedFreeThrows);
+    public void setAttemptedFreeThrows(Integer attemptedFreeThrows) {
+        this.attemptedFreeThrows = attemptedFreeThrows;
     }
 
     /**
-     * madeTwoPointers
+     * @return madeTwoPointers
      */
-    public int getMadeTwoPointers() {
-        return madeTwoPointers.get();
-    }
-
-    public IntegerProperty madeTwoPointersProperty() {
+    public Integer getMadeTwoPointers() {
         return madeTwoPointers;
     }
 
-    public void setMadeTwoPointers(int madeTwoPointers) {
-        this.madeTwoPointers.set(madeTwoPointers);
+    public void setMadeTwoPointers(Integer madeTwoPointers) {
+        this.madeTwoPointers = madeTwoPointers;
     }
 
     /**
-     * attemptedTwoPointers
+     * @return attemptedTwoPointers
      */
-    public int getAttemptedTwoPointers() {
-        return attemptedTwoPointers.get();
-    }
-
-    public IntegerProperty attemptedTwoPointersProperty() {
+    public Integer getAttemptedTwoPointers() {
         return attemptedTwoPointers;
     }
 
-    public void setAttemptedTwoPointers(int attemptedTwoPointers) {
-        this.attemptedTwoPointers.set(attemptedTwoPointers);
+    public void setAttemptedTwoPointers(Integer attemptedTwoPointers) {
+        this.attemptedTwoPointers = attemptedTwoPointers;
     }
 
     /**
-     * madeThreePointers
+     * @return madeThreePointers
      */
-    public int getMadeThreePointers() {
-        return madeThreePointers.get();
-    }
-
-    public IntegerProperty madeThreePointersProperty() {
+    public Integer getMadeThreePointers() {
         return madeThreePointers;
     }
 
-    public void setMadeThreePointers(int madeThreePointers) {
-        this.madeThreePointers.set(madeThreePointers);
+    public void setMadeThreePointers(Integer madeThreePointers) {
+        this.madeThreePointers = madeThreePointers;
     }
 
     /**
-     * attemptedThreePointers
+     * @return attemptedThreePointers
      */
-    public int getAttemptedThreePointers() {
-        return attemptedThreePointers.get();
-    }
-
-    public IntegerProperty attemptedThreePointersProperty() {
+    public Integer getAttemptedThreePointers() {
         return attemptedThreePointers;
     }
 
-    public void setAttemptedThreePointers(int attemptedThreePointers) {
-        this.attemptedThreePointers.set(attemptedThreePointers);
+    public void setAttemptedThreePointers(Integer attemptedThreePointers) {
+        this.attemptedThreePointers = attemptedThreePointers;
     }
 
     /**
-     * getMinutesPlayed
+     * @return minutesPlayed
      */
-    public int getMinutesPlayed() {
-        return minutesPlayed.get();
-    }
-
-    public IntegerProperty minutesPlayedProperty() {
+    public Integer getMinutesPlayed() {
         return minutesPlayed;
     }
 
-    public void setMinutesPlayed(int minutesPlayed) {
-        this.minutesPlayed.set(minutesPlayed);
+    public void setMinutesPlayed(Integer minutesPlayed) {
+        this.minutesPlayed = minutesPlayed;
     }
 }
