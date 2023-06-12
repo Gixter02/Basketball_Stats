@@ -61,7 +61,7 @@
    <right>
       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <AnchorPane prefHeight="375.0" prefWidth="183.0">
+            <AnchorPane prefHeight="571.0" prefWidth="183.0">
                <children>
                   <ComboBox fx:id="quarterComboBox" layoutX="14.0" layoutY="27.0" onAction="#selectQuarter" />
                   <Label layoutX="14.0" layoutY="58.0" text="2P :" />

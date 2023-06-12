@@ -1,19 +1,13 @@
 package com.example.basketball_stats;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.effect.Light;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-
 import java.util.ArrayList;
 
 public class HelloController {
@@ -42,6 +36,7 @@ public class HelloController {
     Point basket = new Point(275, 8);
 
     ArrayList<Point> points = new ArrayList<>();
+    //ArrayList<Ourevent> ourevents = new ArrayList<Ourevent>();
 
 
     @FXML
