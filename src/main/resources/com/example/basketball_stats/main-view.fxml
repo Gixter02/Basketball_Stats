@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.basketball_stats.HelloController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" text="New Game" />
+                  <MenuItem mnemonicParsing="false" text="Open..." />
+                  <MenuItem mnemonicParsing="false" text="Save as..." />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Edit Player" />
+                  <MenuItem mnemonicParsing="false" text="Delete Player" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="View">
+               <items>
+                  <Menu mnemonicParsing="false" text="Team">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="1°Q" />
+                        <MenuItem mnemonicParsing="false" text="2°Q" />
+                        <MenuItem mnemonicParsing="false" text="3°Q" />
+                        <MenuItem mnemonicParsing="false" text="4°Q" />
+                        <MenuItem mnemonicParsing="false" text="1°Half" />
+                        <MenuItem mnemonicParsing="false" text="1°Half" />
+                        <MenuItem mnemonicParsing="false" text="Game" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Player...">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="1°Q" />
+                        <MenuItem mnemonicParsing="false" text="2°Q" />
+                        <MenuItem mnemonicParsing="false" text="3°Q" />
+                        <MenuItem mnemonicParsing="false" text="4°Q" />
+                        <MenuItem mnemonicParsing="false" text="1°Half" />
+                        <MenuItem mnemonicParsing="false" text="1°Half" />
+                        <MenuItem mnemonicParsing="false" text="Game" />
+                     </items>
+                  </Menu>
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <right>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <AnchorPane prefHeight="571.0" prefWidth="183.0">
+               <children>
+                  <ComboBox fx:id="quarterComboBox" layoutX="14.0" layoutY="27.0" onAction="#selectQuarter" />
+                  <Label layoutX="14.0" layoutY="58.0" text="2P :" />
+                  <Label layoutX="14.0" layoutY="83.0" text="3P :" />
+                  <Label layoutX="14.0" layoutY="110.0" text="Free Throws :" />
+                  <Label layoutX="14.0" layoutY="136.0" text="OR :" />
+                  <Label layoutX="14.0" layoutY="162.0" text="DR :" />
+                  <Label layoutX="14.0" layoutY="188.0" text="Steals :" />
+                  <Label layoutX="14.0" layoutY="213.0" text="Turn Over :" />
+                  <Label layoutX="15.0" layoutY="239.0" text="Assists :" />
+                  <Label layoutX="16.0" layoutY="264.0" text="Blocks :" />
+                  <Label fx:id="twoPontersShot" layoutX="43.0" layoutY="58.0" text="Label" />
+                  <Label layoutX="42.0" layoutY="83.0" text="Label" />
+                  <Label layoutX="86.0" layoutY="110.0" text="Label" />
+                  <Label layoutX="42.0" layoutY="136.0" text="Label" />
+                  <Label layoutX="43.0" layoutY="162.0" text="Label" />
+                  <Label layoutX="56.0" layoutY="188.0" text="Label" />
+                  <Label layoutX="84.0" layoutY="213.0" text="Label" />
+                  <Label layoutX="59.0" layoutY="239.0" text="Label" />
+                  <Label layoutX="58.0" layoutY="264.0" text="Label" />
+                  <Label layoutX="19.0" layoutY="5.0" text="Quarter" />
+                  <Button fx:id="made2Shot" layoutX="18.0" layoutY="301.0" mnemonicParsing="false" onAction="#made2PShot" text="2Pmade" />
+                  <Button fx:id="missed2Shot" layoutX="98.0" layoutY="301.0" mnemonicParsing="false" onAction="#missed2PShot" text="2Pmissed" />
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </right>
+   <center>
+      <ImageView fx:id="courtImage" fitWidth="550.0" onMouseClicked="#handleClick" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@images/halfcourt-transformed.jpeg" />
+         </image>
+      </ImageView>
+   </center>
+</BorderPane>

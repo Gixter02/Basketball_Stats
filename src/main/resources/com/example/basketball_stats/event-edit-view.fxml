@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="364.0" prefWidth="531.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.basketball_stats.EventEditDialogController">
+    <expandableContent>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
+    </expandableContent>
+   <buttonTypes>
+      <ButtonType fx:constant="OK" />
+      <ButtonType fx:constant="CANCEL" />
+   </buttonTypes>
+   <content>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0">
+         <children>
+            <Label layoutX="42.0" layoutY="53.0" text="Number" />
+            <TextField fx:id="numberTextField" layoutX="101.0" layoutY="49.0" />
+            <Button fx:id="madeShotButton" layoutX="42.0" layoutY="125.0" mnemonicParsing="false" text="Made Shot" />
+            <Button fx:id="missedShotButton" layoutX="143.0" layoutY="125.0" mnemonicParsing="false" text="Missed Shot" />
+            <Button fx:id="madeFreeThrowsButton" layoutX="251.0" layoutY="125.0" mnemonicParsing="false" text="Made FreeThrows" />
+            <Button fx:id="missedFreeThrowsButton" layoutX="387.0" layoutY="125.0" mnemonicParsing="false" text="Missed FreeThrows" />
+            <Label layoutX="42.0" layoutY="98.0" text="Shots" />
+            <Label layoutX="42.0" layoutY="165.0" text="Rebounds" />
+            <Button fx:id="defensiveReboundButton" layoutX="41.0" layoutY="187.0" mnemonicParsing="false" text="Defensive Rebound" />
+            <Button fx:id="offensiveReboundButton" layoutX="183.0" layoutY="187.0" mnemonicParsing="false" text="Offensive Rebound" />
+            <Button fx:id="assistButton" layoutX="45.0" layoutY="235.0" mnemonicParsing="false" text="Assist" />
+            <Button fx:id="stealButton" layoutX="47.0" layoutY="279.0" mnemonicParsing="false" text="Steal" />
+            <Button fx:id="turnoverButton" layoutX="128.0" layoutY="279.0" mnemonicParsing="false" text="Turnover" />
+            <Button fx:id="blockButton" layoutX="130.0" layoutY="235.0" mnemonicParsing="false" text="Block" />
+            <Button fx:id="foulButton" layoutX="204.0" layoutY="235.0" mnemonicParsing="false" text="Foul" />
+         </children>
+      </AnchorPane>
+   </content>
+</DialogPane>
