@@ -83,8 +83,16 @@ public class OurEvent {
     }
 
 
-
-
+    @Override
+    public String toString() {
+        return "OurEvent{" +
+                "eventType='" + eventType + '\'' +
+                ", whoDidIt='" + whoDidIt + '\'' +
+                ", quarter='" + quarter + '\'' +
+                ", x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }
 
 

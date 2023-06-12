@@ -1,34 +1,80 @@
 package com.example.basketball_stats;
 
+import com.example.basketball_stats.classes.OurEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 public class HelloController {
     @FXML
-    private Label twoPontersShot;
-    @FXML
-    private Button made2Shot;
+    private Label assistsLabel;
 
     @FXML
-    private Button missed2Shot;
+    private Label blocksLabel;
+
     @FXML
     private BorderPane borderPane;
 
     @FXML
     private ImageView courtImage;
+
+    @FXML
+    private Label defensiveReboundLabel;
+
+    @FXML
+    private Label freeThrowsLabel;
+
+    @FXML
+    private Button made2Shot;
+
+    @FXML
+    private Button missed2Shot;
+
+    @FXML
+    private Label offensiveReboundLabel;
+
     @FXML
     private ComboBox<String> quarterComboBox;
 
+    @FXML
+    private Label stealsLabel;
 
-    public int attemptedShot = 0;
-    public int madeShot = 0;
+    @FXML
+    private Label threePointersShotLabel;
+
+    @FXML
+    private Label turnoversLabel;
+
+    @FXML
+    private Label twoPointersShotLabel;
+    @FXML
+    private Label foulsLabel;
+
+
+    public int attempted2PointsShot;
+    public int made2PointsShot;
+    public int attempted3PointsShot;
+    public int made3PointsShot;
+    public int attemptedFreeThrows;
+    public int madeFreeThrows;
+    public int assists;
+    public int offensiveRebound;
+    public int defensiveRebound;
+    public int steals;
+    public int turnovers;
+    public int blocks;
+    public int fouls;
 
     public double x = 0.0;
     public double y = 0.0;
@@ -36,33 +82,99 @@ public class HelloController {
     Point basket = new Point(275, 8);
 
     ArrayList<Point> points = new ArrayList<>();
-    //ArrayList<Ourevent> ourevents = new ArrayList<Ourevent>();
+    ArrayList<OurEvent> ourEvents = new ArrayList<OurEvent>();
 
 
     @FXML
     private void initialize() {
         // Get the list of items and add new items
         quarterComboBox.getItems().addAll("1°Q","2°Q","3°Q","4°Q");
+        attempted2PointsShot = 0;
+        made2PointsShot = 0;
+        attempted3PointsShot = 0;
+        made3PointsShot = 0;
+        attemptedFreeThrows = 0;
+        madeFreeThrows = 0;
+        assists = 0;
+        offensiveRebound = 0;
+        defensiveRebound = 0;
+        steals = 0;
+        turnovers = 0;
+        blocks = 0;
+        fouls = 0;
 
-        twoPontersShot.setText(String.valueOf(madeShot) + "/" + String.valueOf(attemptedShot));
+        updateStatistics();
 
+    }
+    void updateStatistics(){
+        twoPointersShotLabel.setText(String.valueOf(made2PointsShot) + "/" + String.valueOf(attempted2PointsShot));
+        threePointersShotLabel.setText(String.valueOf(made3PointsShot)+ "/" +String.valueOf(attempted3PointsShot));
+        freeThrowsLabel.setText(String.valueOf(madeFreeThrows)+ "/" +String.valueOf(attemptedFreeThrows));
+        assistsLabel.setText(String.valueOf(assists));
+        offensiveReboundLabel.setText(String.valueOf(offensiveRebound));
+        defensiveReboundLabel.setText(String.valueOf(defensiveRebound));
+        stealsLabel.setText(String.valueOf(steals));
+        turnoversLabel.setText(String.valueOf(turnovers));
+        blocksLabel.setText(String.valueOf(blocks));
+        foulsLabel.setText(String.valueOf(fouls));
     }
     @FXML
     void selectQuarter(ActionEvent event) {
 
     }
-    @FXML
-    void made2PShot(ActionEvent event) {
-        attemptedShot++;
-        madeShot++;
-        twoPontersShot.setText(String.valueOf(madeShot) + "/" + String.valueOf(attemptedShot));
+
+    void made2PShot() {
+        attempted2PointsShot++;
+        made2PointsShot++;
+   }
+
+
+    void missed2PShot() {
+        attempted2PointsShot++;
+        }
+
+    void made3PShot() {
+        attempted3PointsShot++;
+        made3PointsShot++;
+        }
+
+
+    void missed3PShot() {
+        attempted3PointsShot++;
+        }
+
+    void madeFreeThrow() {
+        attemptedFreeThrows++;
+        madeFreeThrows++;
+        }
+
+
+    void missedFreeThrow() {
+        attemptedFreeThrows++;
+        }
+    void madeAssist(){
+        assists++;
+    }
+    void madeDefensiveRebound(){
+        defensiveRebound++;
+    }
+    void madeOffensiveRebound(){
+        offensiveRebound++;
+    }
+    //steals,turnovers,blocks
+    void madeSteal(){
+        steals++;
+    }
+    void madeTurnover(){
+        turnovers++;
+    }
+    void madeBlock(){
+        blocks++;
+    }
+    void madeFoul(){
+        fouls++;
     }
 
-    @FXML
-    void missed2PShot(ActionEvent event) {
-        attemptedShot++;
-        twoPontersShot.setText(String.valueOf(madeShot) + "/" + String.valueOf(attemptedShot));
-    }
     @FXML
     void handleClick(MouseEvent event) {
         x = event.getX();
@@ -70,10 +182,80 @@ public class HelloController {
 
         Point point = new Point(x,y);
 
-        if(calculateDistance(point,basket) < 247){
-            made2PShot(new ActionEvent());
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("event-edit-view.fxml"));
+            DialogPane view = loader.load();
+            EventEditDialogController controller = loader.getController();
+
+            // Set the person into the controller.
+            //int selectedIndex = selectedIndex();
+            //controller.setPerson(new Person(personTable.getItems().get(selectedIndex)));
+
+            // Create the dialog
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Edit Event");
+            dialog.initModality(Modality.WINDOW_MODAL);
+            dialog.setDialogPane(view);
+
+            // Show the dialog and wait until the user closes it
+            Optional<ButtonType> clickedButton = dialog.showAndWait();
+            if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
+                String eventType = controller.getStringFromSelectedButton();
+                String quarter = quarterComboBox.getValue();
+                String whoDidIt = controller.getStringFromTextField();
+                OurEvent ourEvent = new OurEvent(eventType,whoDidIt,quarter.substring(0,1),x,y);
+                /*System.out.println("Premuto il bottone ok");
+                System.out.println(controller.getStringFromTextField());
+                System.out.println(controller.getStringFromSelectedButton());*/
+                ourEvents.add(ourEvent);
+                for(OurEvent o : ourEvents){
+                    System.out.print(o + " ;");
+                }
+                System.out.println();
+                switch (eventType) {
+                    case "Made Shot" -> {
+                        if (calculateDistance(point, basket) < 247) {
+                            made2PShot();
+                        } else {
+                            made3PShot();
+                        }
+                    }
+                    case "Missed Shot" -> {
+                        if (calculateDistance(point, basket) < 247) {
+                            missed2PShot();
+                        } else {
+                            missed3PShot();
+                        }
+                    }
+                    case "Made FreeThrows" -> madeFreeThrow();
+                    case "Missed FreeThrows" -> missedFreeThrow();
+                    case "Defensive Rebound" -> madeDefensiveRebound();
+                    case "Offensive Rebound" -> madeOffensiveRebound();
+                    case "Assist" -> madeAssist();
+                    case "Block" -> madeBlock();
+                    case "Foul" -> madeFoul();
+                    case "Turnover" -> madeTurnover();
+                    case "Steal" -> madeSteal();
+                }
+                updateStatistics();
+
+            }
+        } catch (NoSuchElementException e) {
+            //showNoPersonSelectedAlert();
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
+
+
+        /*
+        if(calculateDistance(point,basket) < 247){
+            made2PShot();
+            updateStatistics();
+        }
+        */
         points.add(point);
         System.out.println("Mouse clicked at: (" + x + ", " + y + ")");
         System.out.print(points.size() + ". ");
