@@ -25,9 +25,23 @@ public class Player extends Person {
      * @param lastName lastname of the player
      * @param playerNumber number of the player
      */
-    public Player(String firstName, String lastName, IntegerProperty playerNumber) {
+    public Player(String firstName, String lastName, IntegerProperty playerNumber, IntegerProperty fouls, IntegerProperty defensiveRebounds, IntegerProperty offensiveRebounds, IntegerProperty steals, IntegerProperty turnOver, IntegerProperty assists, IntegerProperty blocks, IntegerProperty madeFreeThrows, IntegerProperty attemptedFreeThrows, IntegerProperty madeTwoPointers, IntegerProperty attemptedTwoPointers, IntegerProperty madeThreePointers, IntegerProperty attemptedThreePointers, IntegerProperty minutesPlayed) {
         super(firstName, lastName);
         this.playerNumber = playerNumber;
+        this.fouls = null;
+        this.defensiveRebounds = null;
+        this.offensiveRebounds = null;
+        this.steals = null;
+        this.turnOver = null;
+        this.assists = null;
+        this.blocks = null;
+        this.madeFreeThrows = null;
+        this.attemptedFreeThrows = null;
+        this.madeTwoPointers = null;
+        this.attemptedTwoPointers = null;
+        this.madeThreePointers = null;
+        this.attemptedThreePointers = null;
+        this.minutesPlayed = null;
     }
 
     /**
