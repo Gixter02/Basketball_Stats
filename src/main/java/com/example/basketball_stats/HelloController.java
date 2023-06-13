@@ -1,6 +1,7 @@
 package com.example.basketball_stats;
 
 import com.example.basketball_stats.classes.OurEvent;
+import com.example.basketball_stats.classes.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,12 +10,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
-import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 public class HelloController {
     @FXML
@@ -83,12 +81,18 @@ public class HelloController {
 
     ArrayList<Point> points = new ArrayList<>();
     ArrayList<OurEvent> ourEvents = new ArrayList<OurEvent>();
+    LinkedList<Player> players = new LinkedList<Player>();
 
 
     @FXML
     private void initialize() {
         // Get the list of items and add new items
         quarterComboBox.getItems().addAll("1°Q","2°Q","3°Q","4°Q");
+        resetStatistics();
+        updateStatistics();
+
+    }
+    void resetStatistics(){
         attempted2PointsShot = 0;
         made2PointsShot = 0;
         attempted3PointsShot = 0;
@@ -102,9 +106,6 @@ public class HelloController {
         turnovers = 0;
         blocks = 0;
         fouls = 0;
-
-        updateStatistics();
-
     }
     void updateStatistics(){
         twoPointersShotLabel.setText(String.valueOf(made2PointsShot) + "/" + String.valueOf(attempted2PointsShot));
@@ -120,8 +121,42 @@ public class HelloController {
     }
     @FXML
     void selectQuarter(ActionEvent event) {
-
+        String quarter = quarterComboBox.getValue().substring(0,1);
+        resetStatistics();
+        for(OurEvent ourEvent : ourEvents){
+            if(ourEvent.getQuarter().equals(quarter)){
+                String eventType = ourEvent.geteventType();
+                Point eventLocation = new Point(ourEvent.getX(), ourEvent.getY());
+                switch (eventType) {
+                    case "Made Shot" -> {
+                        if (calculateDistance(eventLocation, basket) < 247) {
+                            made2PShot();
+                        } else {
+                            made3PShot();
+                        }
+                    }
+                    case "Missed Shot" -> {
+                        if (calculateDistance(eventLocation, basket) < 247) {
+                            missed2PShot();
+                        } else {
+                            missed3PShot();
+                        }
+                    }
+                    case "Made FreeThrows" -> madeFreeThrow();
+                    case "Missed FreeThrows" -> missedFreeThrow();
+                    case "Defensive Rebound" -> madeDefensiveRebound();
+                    case "Offensive Rebound" -> madeOffensiveRebound();
+                    case "Assist" -> madeAssist();
+                    case "Block" -> madeBlock();
+                    case "Foul" -> madeFoul();
+                    case "Turnover" -> madeTurnover();
+                    case "Steal" -> madeSteal();
+                }
+            }
+        }
+        updateStatistics();
     }
+
 
     void made2PShot() {
         attempted2PointsShot++;
