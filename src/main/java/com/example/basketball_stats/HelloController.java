@@ -124,6 +124,33 @@ public class HelloController {
         blocksLabel.setText(String.valueOf(blocks));
         foulsLabel.setText(String.valueOf(fouls));
     }
+    void modifyStatistics(String eventType, Point eventLocation){
+        switch (eventType) {
+            case "Made Shot" -> {
+                if (calculateDistance(eventLocation, basket) < 247) {
+                    made2PShot();
+                } else {
+                    made3PShot();
+                }
+            }
+            case "Missed Shot" -> {
+                if (calculateDistance(eventLocation, basket) < 247) {
+                    missed2PShot();
+                } else {
+                    missed3PShot();
+                }
+            }
+            case "Made FreeThrows" -> madeFreeThrow();
+            case "Missed FreeThrows" -> missedFreeThrow();
+            case "Defensive Rebound" -> madeDefensiveRebound();
+            case "Offensive Rebound" -> madeOffensiveRebound();
+            case "Assist" -> madeAssist();
+            case "Block" -> madeBlock();
+            case "Foul" -> madeFoul();
+            case "Turnover" -> madeTurnover();
+            case "Steal" -> madeSteal();
+        }
+    }
     @FXML
     void selectQuarter(ActionEvent event) {
         String quarter = quarterComboBox.getValue().substring(0,1);
@@ -132,31 +159,7 @@ public class HelloController {
             if(ourEvent.getQuarter().equals(quarter)){
                 String eventType = ourEvent.geteventType();
                 Point eventLocation = new Point(ourEvent.getX(), ourEvent.getY());
-                switch (eventType) {
-                    case "Made Shot" -> {
-                        if (calculateDistance(eventLocation, basket) < 247) {
-                            made2PShot();
-                        } else {
-                            made3PShot();
-                        }
-                    }
-                    case "Missed Shot" -> {
-                        if (calculateDistance(eventLocation, basket) < 247) {
-                            missed2PShot();
-                        } else {
-                            missed3PShot();
-                        }
-                    }
-                    case "Made FreeThrows" -> madeFreeThrow();
-                    case "Missed FreeThrows" -> missedFreeThrow();
-                    case "Defensive Rebound" -> madeDefensiveRebound();
-                    case "Offensive Rebound" -> madeOffensiveRebound();
-                    case "Assist" -> madeAssist();
-                    case "Block" -> madeBlock();
-                    case "Foul" -> madeFoul();
-                    case "Turnover" -> madeTurnover();
-                    case "Steal" -> madeSteal();
-                }
+                modifyStatistics(eventType, eventLocation);
             }
         }
         updateStatistics();
@@ -244,6 +247,7 @@ public class HelloController {
                 String eventType = controller.getStringFromSelectedButton();
                 String quarter = quarterComboBox.getValue();
                 String whoDidIt = controller.getStringFromTextField();
+                Point eventLocation = new Point(x,y);
                 OurEvent ourEvent = new OurEvent(eventType,whoDidIt,quarter.substring(0,1),x,y);
                 /*System.out.println("Premuto il bottone ok");
                 System.out.println(controller.getStringFromTextField());
@@ -253,30 +257,43 @@ public class HelloController {
                     System.out.print(o + " ;");
                 }
                 System.out.println();
-                switch (eventType) {
-                    case "Made Shot" -> {
-                        if (calculateDistance(point, basket) < 247) {
-                            made2PShot();
-                        } else {
-                            made3PShot();
+                modifyStatistics(eventType, eventLocation);
+                //Player mattia = new Player("Mattia","Montanari",12);
+                //players.add(mattia);
+                for(Player player : players){
+                    if(player.getPlayerNumber().equals(Integer.valueOf(ourEvent.getWhoDidIt()))){
+                        switch (eventType) {
+                            case "Made Shot" -> {
+                                if (calculateDistance(eventLocation, basket) < 247) {
+                                    player.setAttemptedTwoPointers(player.getAttemptedTwoPointers() + 1);
+                                    player.setMadeTwoPointers(player.getMadeTwoPointers() + 1);
+                                } else {
+                                    player.setAttemptedThreePointers(player.getAttemptedThreePointers() + 1);
+                                    player.setMadeThreePointers(player.getMadeThreePointers() + 1);
+                                }
+                            }
+                            case "Missed Shot" -> {
+                                if (calculateDistance(eventLocation, basket) < 247) {
+                                    player.setAttemptedTwoPointers(player.getAttemptedTwoPointers() + 1);
+                                } else {
+                                    player.setAttemptedThreePointers(player.getAttemptedThreePointers() + 1);
+                                }
+                            }
+                            case "Made FreeThrows" -> {
+                                player.setAttemptedFreeThrows(player.getAttemptedFreeThrows() + 1);
+                                player.setMadeFreeThrows(player.getMadeFreeThrows() + 1);
+                            }
+                            case "Missed FreeThrows" ->  player.setAttemptedFreeThrows(player.getAttemptedFreeThrows() + 1);
+                            case "Defensive Rebound" -> player.setDefensiveRebounds(player.getDefensiveRebounds() + 1);
+                            case "Offensive Rebound" -> player.setOffensiveRebounds(player.getOffensiveRebounds() + 1);
+                            case "Assist" -> player.setAssists(player.getAssists() + 1);
+                            case "Block" -> player.setBlocks(player.getBlocks() + 1);
+                            case "Foul" -> player.setFouls(player.getFouls() + 1);
+                            case "Turnover" -> player.setTurnOver(player.getTurnOver() + 1);
+                            case "Steal" -> player.setSteals(player.getSteals() + 1);
                         }
+                        //System.out.println(player.toString());
                     }
-                    case "Missed Shot" -> {
-                        if (calculateDistance(point, basket) < 247) {
-                            missed2PShot();
-                        } else {
-                            missed3PShot();
-                        }
-                    }
-                    case "Made FreeThrows" -> madeFreeThrow();
-                    case "Missed FreeThrows" -> missedFreeThrow();
-                    case "Defensive Rebound" -> madeDefensiveRebound();
-                    case "Offensive Rebound" -> madeOffensiveRebound();
-                    case "Assist" -> madeAssist();
-                    case "Block" -> madeBlock();
-                    case "Foul" -> madeFoul();
-                    case "Turnover" -> madeTurnover();
-                    case "Steal" -> madeSteal();
                 }
                 updateStatistics();
 
