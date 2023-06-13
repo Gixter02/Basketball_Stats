@@ -6,7 +6,6 @@ import javafx.beans.property.IntegerProperty;
 public class Player {
     private String firstName;
     private String lastName;
-    private Integer birthday;
     private Integer playerNumber;
     private Integer fouls;
     private Integer defensiveRebounds;
@@ -31,10 +30,9 @@ public class Player {
     /**
      * Most used constructor
      */
-    public Player(String firstName, String lastName, Integer birthday, Integer playerNumber, Integer fouls, Integer defensiveRebounds, Integer offensiveRebounds, Integer steals, Integer turnOver, Integer assists, Integer blocks, Integer madeFreeThrows, Integer attemptedFreeThrows, Integer madeTwoPointers, Integer attemptedTwoPointers, Integer madeThreePointers, Integer attemptedThreePointers, Integer minutesPlayed) {
+    public Player(String firstName, String lastName, Integer playerNumber, Integer fouls, Integer defensiveRebounds, Integer offensiveRebounds, Integer steals, Integer turnOver, Integer assists, Integer blocks, Integer madeFreeThrows, Integer attemptedFreeThrows, Integer madeTwoPointers, Integer attemptedTwoPointers, Integer madeThreePointers, Integer attemptedThreePointers, Integer minutesPlayed) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthday = birthday;
         this.playerNumber = playerNumber;
         this.fouls = 0;
         this.defensiveRebounds = 0;
@@ -76,17 +74,6 @@ public class Player {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    /**
-     * @return birthday
-     */
-    public Integer getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Integer birthday) {
-        this.birthday = birthday;
     }
 
     /**
