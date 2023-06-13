@@ -8,6 +8,7 @@ open module com.example.basketball_stats {
     requires com.fasterxml.jackson.datatype.jsr310;
 
     exports com.example.basketball_stats;
+    exports com.example.basketball_stats.classes;
 }
 
 

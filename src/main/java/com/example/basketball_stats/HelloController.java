@@ -2,6 +2,7 @@ package com.example.basketball_stats;
 
 import com.example.basketball_stats.classes.OurEvent;
 import com.example.basketball_stats.classes.Player;
+import com.example.basketball_stats.classes.Point;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import javafx.event.ActionEvent;

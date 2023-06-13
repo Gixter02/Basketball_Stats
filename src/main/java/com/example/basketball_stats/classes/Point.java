@@ -1,4 +1,4 @@
-package com.example.basketball_stats;
+package com.example.basketball_stats.classes;
 
 public class Point {
     double x;
