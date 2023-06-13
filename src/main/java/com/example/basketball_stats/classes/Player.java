@@ -2,12 +2,11 @@ package com.example.basketball_stats.classes;
 
 import javafx.beans.property.IntegerProperty;
 
-import java.util.Objects;
-
 
 public class Player {
     private String firstName;
     private String lastName;
+    private Integer birthday;
     private Integer playerNumber;
     private Integer fouls;
     private Integer defensiveRebounds;
@@ -32,9 +31,10 @@ public class Player {
     /**
      * Most used constructor
      */
-    public Player(String firstName, String lastName, Integer playerNumber, Integer fouls, Integer defensiveRebounds, Integer offensiveRebounds, Integer steals, Integer turnOver, Integer assists, Integer blocks, Integer madeFreeThrows, Integer attemptedFreeThrows, Integer madeTwoPointers, Integer attemptedTwoPointers, Integer madeThreePointers, Integer attemptedThreePointers, Integer minutesPlayed) {
+    public Player(String firstName, String lastName, Integer birthday, Integer playerNumber, Integer fouls, Integer defensiveRebounds, Integer offensiveRebounds, Integer steals, Integer turnOver, Integer assists, Integer blocks, Integer madeFreeThrows, Integer attemptedFreeThrows, Integer madeTwoPointers, Integer attemptedTwoPointers, Integer madeThreePointers, Integer attemptedThreePointers, Integer minutesPlayed) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.birthday = birthday;
         this.playerNumber = playerNumber;
         this.fouls = 0;
         this.defensiveRebounds = 0;
@@ -52,25 +52,6 @@ public class Player {
         this.minutesPlayed = 0;
     }
 
-    public Player(String firstName, String lastName, Integer playerNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.playerNumber = playerNumber;
-        this.fouls = 0;
-        this.defensiveRebounds = 0;
-        this.offensiveRebounds = 0;
-        this.steals = 0;
-        this.turnOver = 0;
-        this.assists = 0;
-        this.blocks = 0;
-        this.madeFreeThrows = 0;
-        this.attemptedFreeThrows = 0;
-        this.madeTwoPointers = 0;
-        this.attemptedTwoPointers = 0;
-        this.madeThreePointers = 0;
-        this.attemptedThreePointers = 0;
-        this.minutesPlayed = 0;
-    }
     /*
      * Getters and setters
      */
@@ -97,6 +78,16 @@ public class Player {
         this.lastName = lastName;
     }
 
+    /**
+     * @return birthday
+     */
+    public Integer getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Integer birthday) {
+        this.birthday = birthday;
+    }
 
     /**
      * @return playerNumber
@@ -261,41 +252,5 @@ public class Player {
 
     public void setMinutesPlayed(Integer minutesPlayed) {
         this.minutesPlayed = minutesPlayed;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Player player = (Player) o;
-        return playerNumber.equals(player.playerNumber);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(playerNumber);
-    }
-
-    @Override
-    public String toString() {
-        return "Player{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", playerNumber=" + playerNumber +
-                ", fouls=" + fouls +
-                ", defensiveRebounds=" + defensiveRebounds +
-                ", offensiveRebounds=" + offensiveRebounds +
-                ", steals=" + steals +
-                ", turnOver=" + turnOver +
-                ", assists=" + assists +
-                ", blocks=" + blocks +
-                ", madeFreeThrows=" + madeFreeThrows +
-                ", attemptedFreeThrows=" + attemptedFreeThrows +
-                ", madeTwoPointers=" + madeTwoPointers +
-                ", attemptedTwoPointers=" + attemptedTwoPointers +
-                ", madeThreePointers=" + madeThreePointers +
-                ", attemptedThreePointers=" + attemptedThreePointers +
-                ", minutesPlayed=" + minutesPlayed +
-                '}';
     }
 }
