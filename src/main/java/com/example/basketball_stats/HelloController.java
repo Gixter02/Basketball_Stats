@@ -2,6 +2,8 @@ package com.example.basketball_stats;
 
 import com.example.basketball_stats.classes.OurEvent;
 import com.example.basketball_stats.classes.Player;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,8 +11,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -311,6 +315,34 @@ public class HelloController {
             System.out.println("Center Y: " + centerY);
         }
     }
+
+
+    @FXML
+    private void handleSaveAsJson(ActionEvent event) {
+        try {
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter jsonFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
+            fileChooser.getExtensionFilters().add(jsonFilter);
+
+            File file = fileChooser.showSaveDialog(null);
+            if (file != null) {
+                ObjectMapper mapper = new ObjectMapper();
+                mapper.registerModule(new JavaTimeModule());
+                mapper.writerWithDefaultPrettyPrinter().writeValue(file, ourEvents);
+            }
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, "Could not save data in json").showAndWait();
+        }
+    }
+
+    
+
+
+
+
+
+
+
 
     public static double[] calculateSemicircle(ArrayList<Point> points) {
         if (points.size() < 2) {

@@ -20,7 +20,12 @@
             <items>
                   <MenuItem mnemonicParsing="false" text="New Game" />
                   <MenuItem mnemonicParsing="false" text="Open..." />
-                  <MenuItem mnemonicParsing="false" text="Save as..." />
+                  <Menu mnemonicParsing="false" text="Save As">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#handleSaveAsJson" text=".json" />
+                        <MenuItem mnemonicParsing="false" text=".csv" />
+                    </items>
+                  </Menu>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">

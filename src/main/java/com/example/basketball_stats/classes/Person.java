@@ -16,9 +16,9 @@ public class Person {
     /**
      * Default constructor.
      */
-    /*public Person() {
+    public Person() {
         this(null, null);
-    }*/
+    }
 
     /**
      * Other constructors

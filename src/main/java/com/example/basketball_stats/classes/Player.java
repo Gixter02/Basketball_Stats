@@ -3,6 +3,8 @@ package com.example.basketball_stats.classes;
 import javafx.beans.property.IntegerProperty;
 
 public class Player extends Person {
+    private String firstName;
+    private String lastName;
     private Integer playerNumber;
     private Integer fouls;
     private Integer defensiveRebounds;
@@ -19,57 +21,63 @@ public class Player extends Person {
     private Integer attemptedThreePointers;
     private Integer minutesPlayed;
 
+
+
+
+
+
     /**
-     * This will be the most used constructor, as it will be called to insert all the players
-     * @param firstName name of the player
-     * @param lastName lastname of the player
-     * @param playerNumber number of the player
+     * Most used constructor
      */
     public Player(String firstName, String lastName, Integer playerNumber, Integer fouls, Integer defensiveRebounds, Integer offensiveRebounds, Integer steals, Integer turnOver, Integer assists, Integer blocks, Integer madeFreeThrows, Integer attemptedFreeThrows, Integer madeTwoPointers, Integer attemptedTwoPointers, Integer madeThreePointers, Integer attemptedThreePointers, Integer minutesPlayed) {
-        super(firstName, lastName);
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.playerNumber = playerNumber;
-        this.fouls = null;
-        this.defensiveRebounds = null;
-        this.offensiveRebounds = null;
-        this.steals = null;
-        this.turnOver = null;
-        this.assists = null;
-        this.blocks = null;
-        this.madeFreeThrows = null;
-        this.attemptedFreeThrows = null;
-        this.madeTwoPointers = null;
-        this.attemptedTwoPointers = null;
-        this.madeThreePointers = null;
-        this.attemptedThreePointers = null;
-        this.minutesPlayed = null;
+        this.fouls = 0;
+        this.defensiveRebounds = 0;
+        this.offensiveRebounds = 0;
+        this.steals = 0;
+        this.turnOver = 0;
+        this.assists = 0;
+        this.blocks = 0;
+        this.madeFreeThrows = 0;
+        this.attemptedFreeThrows = 0;
+        this.madeTwoPointers = 0;
+        this.attemptedTwoPointers = 0;
+        this.madeThreePointers = 0;
+        this.attemptedThreePointers = 0;
+        this.minutesPlayed = 0;
     }
-
-    /**
-     * Costruttore di player che ha come superclass constructor il costruttore con solo firstname e lastname. Poi farò altri costruttori quando li capirò meglio.
-     */
-    public Player(String firstName, String lastName, Integer fouls, Integer defensiveRebounds, Integer offensiveRebounds, Integer steals, Integer turnOver, Integer assists, Integer blocks, Integer madeFreeThrows, Integer attemptedFreeThrows, Integer madeTwoPointers, Integer attemptedTwoPointers, Integer madeThreePointers, Integer attemptedThreePointers, Integer minutesPlayed) {
-        super(firstName, lastName);
-        this.fouls = fouls;
-        this.defensiveRebounds = defensiveRebounds;
-        this.offensiveRebounds = offensiveRebounds;
-        this.steals = steals;
-        this.turnOver = turnOver;
-        this.assists = assists;
-        this.blocks = blocks;
-        this.madeFreeThrows = madeFreeThrows;
-        this.attemptedFreeThrows = attemptedFreeThrows;
-        this.madeTwoPointers = madeTwoPointers;
-        this.attemptedTwoPointers = attemptedTwoPointers;
-        this.madeThreePointers = madeThreePointers;
-        this.attemptedThreePointers = attemptedThreePointers;
-        this.minutesPlayed = minutesPlayed;
-    }
-
-
 
     /*
      * Getters and setters
      */
+
+    /**
+     * @return firstName
+     */
+    @Override
+    public String getFirstName() {
+        return firstName;
+    }
+
+    @Override
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    /**
+     * @return lastName
+     */
+    @Override
+    public String getLastName() {
+        return lastName;
+    }
+
+    @Override
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     /**
      * @return playerNumber
