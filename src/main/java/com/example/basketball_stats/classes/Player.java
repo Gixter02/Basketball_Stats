@@ -2,9 +2,12 @@ package com.example.basketball_stats.classes;
 
 import javafx.beans.property.IntegerProperty;
 
-public class Player extends Person {
+import java.time.LocalDate;
+
+public class Player {
     private String firstName;
     private String lastName;
+    private LocalDate birthday;
     private Integer playerNumber;
     private Integer fouls;
     private Integer defensiveRebounds;
@@ -29,9 +32,10 @@ public class Player extends Person {
     /**
      * Most used constructor
      */
-    public Player(String firstName, String lastName, Integer playerNumber, Integer fouls, Integer defensiveRebounds, Integer offensiveRebounds, Integer steals, Integer turnOver, Integer assists, Integer blocks, Integer madeFreeThrows, Integer attemptedFreeThrows, Integer madeTwoPointers, Integer attemptedTwoPointers, Integer madeThreePointers, Integer attemptedThreePointers, Integer minutesPlayed) {
+    public Player(String firstName, String lastName, LocalDate birthday, Integer playerNumber, Integer fouls, Integer defensiveRebounds, Integer offensiveRebounds, Integer steals, Integer turnOver, Integer assists, Integer blocks, Integer madeFreeThrows, Integer attemptedFreeThrows, Integer madeTwoPointers, Integer attemptedTwoPointers, Integer madeThreePointers, Integer attemptedThreePointers, Integer minutesPlayed) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.birthday = birthday;
         this.playerNumber = playerNumber;
         this.fouls = 0;
         this.defensiveRebounds = 0;
@@ -56,12 +60,10 @@ public class Player extends Person {
     /**
      * @return firstName
      */
-    @Override
     public String getFirstName() {
         return firstName;
     }
 
-    @Override
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -69,14 +71,23 @@ public class Player extends Person {
     /**
      * @return lastName
      */
-    @Override
     public String getLastName() {
         return lastName;
     }
 
-    @Override
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    /**
+     * @return birthday
+     */
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 
     /**
