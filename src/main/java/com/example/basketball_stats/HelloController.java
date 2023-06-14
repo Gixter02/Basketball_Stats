@@ -362,17 +362,32 @@ public class HelloController {
     @FXML
     void handleNewTeam(ActionEvent event) {
         try {
-            Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("team-insertion-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            stage.setTitle("Team insertion");
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.show();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("team-insertion-view.fxml"));
+            DialogPane view = loader.load();
+            TeamInsertionDialogController controller = loader.getController();
+
+            // Set the person into the controller.
+            //int selectedIndex = selectedIndex();
+            //controller.setPerson(new Person(personTable.getItems().get(selectedIndex)));
+
+            // Create the dialog
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Team Insertion");
+            dialog.initModality(Modality.WINDOW_MODAL);
+            dialog.setDialogPane(view);
+
+            // Show the dialog and wait until the user closes it
+            Optional<ButtonType> clickedButton = dialog.showAndWait();
+            if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.FINISH){
+                players = controller.getListOfPlayers();
+                System.out.println(players);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     @FXML

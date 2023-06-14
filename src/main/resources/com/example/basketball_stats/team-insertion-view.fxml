@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonType?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="334.0" prefWidth="507.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.basketball_stats.TeamInsertionDialogController">
-   <children>
-      <TextField fx:id="firstNameTextfield" layoutX="14.0" layoutY="40.0" prefHeight="24.0" prefWidth="182.0" />
-      <TextField fx:id="lastNameTextfield" layoutX="14.0" layoutY="97.0" prefHeight="24.0" prefWidth="182.0" />
-      <TextField fx:id="numberOfPlayer" layoutX="14.0" layoutY="152.0" prefHeight="24.0" prefWidth="182.0" />
-      <Label layoutX="14.0" layoutY="24.0" text="First Name" />
-      <Label layoutX="14.0" layoutY="81.0" text="Last Name" />
-      <Label layoutX="14.0" layoutY="136.0" text="Number" />
-      <ComboBox fx:id="numberOfPlayersToAddCombobox" layoutX="14.0" layoutY="221.0" prefHeight="24.0" prefWidth="182.0" promptText="Number of players" />
-      <Label layoutX="14.0" layoutY="275.0" text="Player added :" />
-      <Label fx:id="numberOfPlayersAddedLabel" layoutX="110.0" layoutY="275.0" text="Label" />
-      <Button fx:id="addPlayerButton" layoutX="404.0" layoutY="291.0" mnemonicParsing="false" text="Add player" />
-   </children>
-</AnchorPane>
+<DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="356.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.basketball_stats.TeamInsertionDialogController">
+    <header>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0">
+         <children>
+            <AnchorPane prefHeight="334.0" prefWidth="507.0">
+               <children>
+                  <TextField fx:id="firstNameTextfield" layoutX="14.0" layoutY="44.0" prefHeight="24.0" prefWidth="182.0" />
+                  <TextField fx:id="lastNameTextfield" layoutX="14.0" layoutY="97.0" prefHeight="24.0" prefWidth="182.0" />
+                  <TextField fx:id="numberOfPlayerTextField" layoutX="14.0" layoutY="152.0" prefHeight="24.0" prefWidth="182.0" />
+                  <Label layoutX="14.0" layoutY="24.0" text="First Name" />
+                  <Label layoutX="14.0" layoutY="81.0" text="Last Name" />
+                  <Label layoutX="14.0" layoutY="136.0" text="Number" />
+                  <ComboBox fx:id="numberOfPlayersToAddCombobox" layoutX="14.0" layoutY="221.0" onAction="#handleSelectedNumberOfPlayersToAdd" prefHeight="24.0" prefWidth="182.0" promptText="Number of players" />
+                  <Label layoutX="14.0" layoutY="275.0" text="Player added :" />
+                  <Label fx:id="numberOfPlayersAddedLabel" layoutX="92.0" layoutY="275.0" text="Label" />
+                  <Button fx:id="addPlayerButton" layoutX="254.0" layoutY="271.0" mnemonicParsing="false" onAction="#handleAddPlayer" text="Add player" />
+               </children>
+            </AnchorPane>
+         </children></AnchorPane>
+    </header>
+    <expandableContent>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
+    </expandableContent>
+   <buttonTypes>
+      <ButtonType fx:constant="CANCEL" />
+      <ButtonType fx:constant="FINISH" />
+   </buttonTypes>
+</DialogPane>
