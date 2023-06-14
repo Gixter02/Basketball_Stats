@@ -20,20 +20,29 @@
             <items>
                   <Menu mnemonicParsing="false" text="New">
                     <items>
-                      <MenuItem mnemonicParsing="false" onAction="#handleNewGame" text="Game..." />
-                        <MenuItem mnemonicParsing="false" onAction="#handleNewTeam" text="Team..." />
+                      <MenuItem mnemonicParsing="false" onAction="#handleNewGame" text="New Game (reset statistics)" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleNewTeam" text="Create Team..." />
                     </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Open">
                     <items>
-                      <MenuItem mnemonicParsing="false" onAction="#handleOpenGame" text="Game..." />
-                        <MenuItem mnemonicParsing="false" onAction="#handleOpenTeam" text="Team..." />
+                      <MenuItem mnemonicParsing="false" onAction="#handleOpenGame" text="Open Game..." />
+                        <MenuItem mnemonicParsing="false" onAction="#handleOpenTeam" text="Open Team..." />
                     </items>
                   </Menu>
-                  <Menu mnemonicParsing="false" text="Save As">
+                  <Menu mnemonicParsing="false" text="Save">
                     <items>
-                      <MenuItem mnemonicParsing="false" onAction="#handleSaveAsJson" text=".json" />
-                        <MenuItem mnemonicParsing="false" text=".csv" />
+                        <Menu mnemonicParsing="false" text="Game">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#handleSaveGameAsJson" text="Game Statistics (.json)" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleSaveGameAsCsv" text="Team Statistics (.csv)" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Team">
+                          <items>
+                              <MenuItem mnemonicParsing="false" onAction="#handleSaveTeamAsJson" text="Players list (.json)" />
+                          </items>
+                        </Menu>
                     </items>
                   </Menu>
             </items>

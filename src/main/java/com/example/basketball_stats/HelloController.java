@@ -402,7 +402,7 @@ public class HelloController {
 
 
     @FXML
-    private void handleSaveAsJson(ActionEvent event) {
+    private void handleSaveGameAsJson(ActionEvent event) {
         try {
             FileChooser fileChooser = new FileChooser();
             FileChooser.ExtensionFilter jsonFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
@@ -419,9 +419,16 @@ public class HelloController {
         }
     }
 
-    
-    // csv
 
+    @FXML
+    void handleSaveGameAsCsv(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleSaveTeamAsJson(ActionEvent event) {
+
+    }
 
 
 
