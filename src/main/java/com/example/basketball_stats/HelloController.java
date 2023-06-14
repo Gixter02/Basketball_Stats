@@ -3,23 +3,21 @@ package com.example.basketball_stats;
 import com.example.basketball_stats.classes.OurEvent;
 import com.example.basketball_stats.classes.Player;
 import com.example.basketball_stats.classes.Point;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
-import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -98,8 +96,8 @@ public class HelloController {
         // Get the list of items and add new items
         quarterComboBox.getItems().addAll("1°Q","2°Q","3°Q","4°Q");
         points = new ArrayList<>();
-        ourEvents = new ArrayList<OurEvent>();
-        players = new LinkedList<Player>();
+        ourEvents = new ArrayList<>();
+        players = new LinkedList<>();
         resetStatistics();
         updateStatistics();
 
@@ -439,7 +437,38 @@ public class HelloController {
 
     @FXML
     void handleSaveGameAsCsv(ActionEvent event) {
+        System.out.println("appena prima del try");
+        try {
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+            fileChooser.getExtensionFilters().add(csvFilter);
 
+            File file = fileChooser.showSaveDialog(null);
+            if(file != null) {
+                String filePath = file.getPath() + ".csv";
+                System.out.println(filePath);
+
+                BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+
+                // Write the header row
+                writer.write("First Name,Last Name,Number,Fouls,DR,OR,ST,TO,AS,BLK,FT made,FT attempted,2P made,2P attempted,3P made,3P attempted,Minutes\n");
+
+                for(Player player : players) {
+                    writer.write(String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", player.getFirstName(), player.getLastName(), player.getPlayerNumber().toString(), player.getFouls().toString(), player.getDefensiveRebounds().toString(), player.getOffensiveRebounds().toString(), player.getSteals().toString(), player.getTurnOver().toString(), player.getAssists().toString(), player.getBlocks().toString(), player.getMadeFreeThrows().toString(), player.getAttemptedFreeThrows().toString(), player.getMadeTwoPointers().toString(), player.getAttemptedTwoPointers().toString(), player.getMadeThreePointers().toString(), player.getAttemptedThreePointers().toString(), player.getMinutesPlayed().toString()));
+                }
+                // Write data rows
+                //writer.write("John Doe,johndoe@example.com,1234567890\n");
+                //writer.write("Jane Smith,janesmith@example.com,9876543210\n");
+
+                // Close the writer
+                writer.close();
+
+                System.out.println("CSV file exported successfully.");
+            }
+
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, "Could not save data in csv").showAndWait();
+        }
     }
 
     @FXML
