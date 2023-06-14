@@ -3,6 +3,7 @@ package com.example.basketball_stats;
 import com.example.basketball_stats.classes.OurEvent;
 import com.example.basketball_stats.classes.Player;
 import com.example.basketball_stats.classes.Point;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import javafx.event.ActionEvent;
@@ -397,7 +398,23 @@ public class HelloController {
 
     @FXML
     void handleOpenTeam(ActionEvent event) {
+        try {
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
+            fileChooser.getExtensionFilters().add(extFilter);
 
+            File file = fileChooser.showOpenDialog(null);
+            if (file != null) {
+                ObjectMapper mapper = new ObjectMapper();
+                mapper.registerModule(new JavaTimeModule());
+                players = mapper.readValue(file, players.getClass());
+                //personTable.getItems().addAll(persons);
+                //players = new LinkedList<>(playersTmp);
+                System.out.println(players);
+            }
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, "Could not load data").showAndWait();
+        }
     }
 
 
