@@ -427,7 +427,20 @@ public class HelloController {
 
     @FXML
     void handleSaveTeamAsJson(ActionEvent event) {
+        try {
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter jsonFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
+            fileChooser.getExtensionFilters().add(jsonFilter);
 
+            File file = fileChooser.showSaveDialog(null);
+            if (file != null) {
+                ObjectMapper mapper = new ObjectMapper();
+                mapper.registerModule(new JavaTimeModule());
+                mapper.writerWithDefaultPrettyPrinter().writeValue(file, players);
+            }
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, "Could not save data in json").showAndWait();
+        }
     }
 
 
