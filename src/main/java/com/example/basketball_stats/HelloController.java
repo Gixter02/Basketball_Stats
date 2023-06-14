@@ -345,6 +345,27 @@ public class HelloController {
 
 
     @FXML
+    void handleNewGame(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleNewTeam(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleOpenGame(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleOpenTeam(ActionEvent event) {
+
+    }
+
+
+    @FXML
     private void handleSaveAsJson(ActionEvent event) {
         try {
             FileChooser fileChooser = new FileChooser();
