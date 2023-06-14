@@ -18,8 +18,18 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem mnemonicParsing="false" text="New Game" />
-                  <MenuItem mnemonicParsing="false" text="Open..." />
+                  <Menu mnemonicParsing="false" text="New">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#handleNewGame" text="Game" />
+                      <MenuItem mnemonicParsing="false" onAction="#handleNewTeam" text="Team" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Open">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#handleOpenGame" text="Game" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleOpenTeam" text="Team" />
+                     </items>
+                  </Menu>
                   <Menu mnemonicParsing="false" text="Save As">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#handleSaveAsJson" text=".json" />
