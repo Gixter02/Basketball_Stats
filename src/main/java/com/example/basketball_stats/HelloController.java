@@ -84,15 +84,18 @@ public class HelloController {
 
     Point basket = new Point(275, 8);
 
-    ArrayList<Point> points = new ArrayList<>();
-    ArrayList<OurEvent> ourEvents = new ArrayList<OurEvent>();
-    LinkedList<Player> players = new LinkedList<Player>();
+    ArrayList<Point> points;
+    ArrayList<OurEvent> ourEvents;
+    LinkedList<Player> players;
 
 
     @FXML
     private void initialize() {
         // Get the list of items and add new items
         quarterComboBox.getItems().addAll("1°Q","2°Q","3°Q","4°Q");
+        points = new ArrayList<>();
+        ourEvents = new ArrayList<OurEvent>();
+        players = new LinkedList<Player>();
         resetStatistics();
         updateStatistics();
 
@@ -346,7 +349,11 @@ public class HelloController {
 
     @FXML
     void handleNewGame(ActionEvent event) {
-
+        points = new ArrayList<>();
+        ourEvents = new ArrayList<OurEvent>();
+        players = new LinkedList<Player>();
+        resetStatistics();
+        updateStatistics();
     }
 
     @FXML
