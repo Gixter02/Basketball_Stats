@@ -217,93 +217,101 @@ public class HelloController {
     void madeFoul(){
         fouls++;
     }
+    void showNoQuarterSelectedAlert() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("No Selection");
+        alert.setHeaderText("No Quarter Selected");
+        alert.setContentText("Please select a quarter.");
+        alert.showAndWait();
+    }
 
     @FXML
     void handleClick(MouseEvent event) {
-        x = event.getX();
-        y = event.getY();
+        if(quarterComboBox.getValue() != null) {
+            x = event.getX();
+            y = event.getY();
 
-        Point point = new Point(x,y);
+            Point point = new Point(x, y);
 
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("event-edit-view.fxml"));
-            DialogPane view = loader.load();
-            EventEditDialogController controller = loader.getController();
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("event-edit-view.fxml"));
+                DialogPane view = loader.load();
+                EventEditDialogController controller = loader.getController();
 
-            // Set the person into the controller.
-            //int selectedIndex = selectedIndex();
-            //controller.setPerson(new Person(personTable.getItems().get(selectedIndex)));
+                // Set the person into the controller.
+                //int selectedIndex = selectedIndex();
+                //controller.setPerson(new Person(personTable.getItems().get(selectedIndex)));
 
-            // Create the dialog
-            Dialog<ButtonType> dialog = new Dialog<>();
-            dialog.setTitle("Edit Event");
-            dialog.initModality(Modality.WINDOW_MODAL);
-            dialog.setDialogPane(view);
+                // Create the dialog
+                Dialog<ButtonType> dialog = new Dialog<>();
+                dialog.setTitle("Edit Event");
+                dialog.initModality(Modality.WINDOW_MODAL);
+                dialog.setDialogPane(view);
 
-            // Show the dialog and wait until the user closes it
-            Optional<ButtonType> clickedButton = dialog.showAndWait();
-            if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
-                String eventType = controller.getStringFromSelectedButton();
-                String quarter = quarterComboBox.getValue();
-                String whoDidIt = controller.getStringFromTextField();
-                Point eventLocation = new Point(x,y);
-                OurEvent ourEvent = new OurEvent(eventType,whoDidIt,quarter.substring(0,1),x,y);
+                // Show the dialog and wait until the user closes it
+                Optional<ButtonType> clickedButton = dialog.showAndWait();
+                if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
+                    String eventType = controller.getStringFromSelectedButton();
+                    String quarter = quarterComboBox.getValue();
+                    String whoDidIt = controller.getStringFromTextField();
+                    Point eventLocation = new Point(x, y);
+                    OurEvent ourEvent = new OurEvent(eventType, whoDidIt, quarter.substring(0, 1), x, y);
                 /*System.out.println("Premuto il bottone ok");
                 System.out.println(controller.getStringFromTextField());
                 System.out.println(controller.getStringFromSelectedButton());*/
-                ourEvents.add(ourEvent);
-                for(OurEvent o : ourEvents){
-                    System.out.print(o + " ;");
-                }
-                System.out.println();
-                modifyStatistics(eventType, eventLocation);
-                //Player mattia = new Player("Mattia","Montanari",12);
-                //players.add(mattia);
-                for(Player player : players){
-                    if(player.getPlayerNumber().equals(Integer.valueOf(ourEvent.getWhoDidIt()))){
-                        switch (eventType) {
-                            case "Made Shot" -> {
-                                if (calculateDistance(eventLocation, basket) < 247) {
-                                    player.setAttemptedTwoPointers(player.getAttemptedTwoPointers() + 1);
-                                    player.setMadeTwoPointers(player.getMadeTwoPointers() + 1);
-                                } else {
-                                    player.setAttemptedThreePointers(player.getAttemptedThreePointers() + 1);
-                                    player.setMadeThreePointers(player.getMadeThreePointers() + 1);
-                                }
-                            }
-                            case "Missed Shot" -> {
-                                if (calculateDistance(eventLocation, basket) < 247) {
-                                    player.setAttemptedTwoPointers(player.getAttemptedTwoPointers() + 1);
-                                } else {
-                                    player.setAttemptedThreePointers(player.getAttemptedThreePointers() + 1);
-                                }
-                            }
-                            case "Made FreeThrows" -> {
-                                player.setAttemptedFreeThrows(player.getAttemptedFreeThrows() + 1);
-                                player.setMadeFreeThrows(player.getMadeFreeThrows() + 1);
-                            }
-                            case "Missed FreeThrows" ->  player.setAttemptedFreeThrows(player.getAttemptedFreeThrows() + 1);
-                            case "Defensive Rebound" -> player.setDefensiveRebounds(player.getDefensiveRebounds() + 1);
-                            case "Offensive Rebound" -> player.setOffensiveRebounds(player.getOffensiveRebounds() + 1);
-                            case "Assist" -> player.setAssists(player.getAssists() + 1);
-                            case "Block" -> player.setBlocks(player.getBlocks() + 1);
-                            case "Foul" -> player.setFouls(player.getFouls() + 1);
-                            case "Turnover" -> player.setTurnOver(player.getTurnOver() + 1);
-                            case "Steal" -> player.setSteals(player.getSteals() + 1);
-                        }
-                        //System.out.println(player.toString());
+                    ourEvents.add(ourEvent);
+                    for (OurEvent o : ourEvents) {
+                        System.out.print(o + " ;");
                     }
-                }
-                updateStatistics();
+                    System.out.println();
+                    modifyStatistics(eventType, eventLocation);
+                    //Player mattia = new Player("Mattia","Montanari",12);
+                    //players.add(mattia);
+                    for (Player player : players) {
+                        if (player.getPlayerNumber().equals(Integer.valueOf(ourEvent.getWhoDidIt()))) {
+                            switch (eventType) {
+                                case "Made Shot" -> {
+                                    if (calculateDistance(eventLocation, basket) < 247) {
+                                        player.setAttemptedTwoPointers(player.getAttemptedTwoPointers() + 1);
+                                        player.setMadeTwoPointers(player.getMadeTwoPointers() + 1);
+                                    } else {
+                                        player.setAttemptedThreePointers(player.getAttemptedThreePointers() + 1);
+                                        player.setMadeThreePointers(player.getMadeThreePointers() + 1);
+                                    }
+                                }
+                                case "Missed Shot" -> {
+                                    if (calculateDistance(eventLocation, basket) < 247) {
+                                        player.setAttemptedTwoPointers(player.getAttemptedTwoPointers() + 1);
+                                    } else {
+                                        player.setAttemptedThreePointers(player.getAttemptedThreePointers() + 1);
+                                    }
+                                }
+                                case "Made FreeThrows" -> {
+                                    player.setAttemptedFreeThrows(player.getAttemptedFreeThrows() + 1);
+                                    player.setMadeFreeThrows(player.getMadeFreeThrows() + 1);
+                                }
+                                case "Missed FreeThrows" -> player.setAttemptedFreeThrows(player.getAttemptedFreeThrows() + 1);
+                                case "Defensive Rebound" -> player.setDefensiveRebounds(player.getDefensiveRebounds() + 1);
+                                case "Offensive Rebound" -> player.setOffensiveRebounds(player.getOffensiveRebounds() + 1);
+                                case "Assist" -> player.setAssists(player.getAssists() + 1);
+                                case "Block" -> player.setBlocks(player.getBlocks() + 1);
+                                case "Foul" -> player.setFouls(player.getFouls() + 1);
+                                case "Turnover" -> player.setTurnOver(player.getTurnOver() + 1);
+                                case "Steal" -> player.setSteals(player.getSteals() + 1);
+                            }
+                            //System.out.println(player.toString());
+                        }
+                    }
+                    updateStatistics();
 
+                }
+            } catch (NoSuchElementException e) {
+                //showNoQuarterSelectedAlert();
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (NoSuchElementException e) {
-            //showNoPersonSelectedAlert();
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
 
 
@@ -313,24 +321,25 @@ public class HelloController {
             updateStatistics();
         }
         */
-        points.add(point);
-        System.out.println("Mouse clicked at: (" + x + ", " + y + ")");
-        System.out.print(points.size() + ". ");
-        for (Point p : points){
-            System.out.print(p+ ", ");
-        }
-        System.out.println();
-        if(points.size() >= 5){
-            double[] semicircleParams = calculateSemicircle(points);
+            points.add(point);
+            System.out.println("Mouse clicked at: (" + x + ", " + y + ")");
+            System.out.print(points.size() + ". ");
+            for (Point p : points) {
+                System.out.print(p + ", ");
+            }
+            System.out.println();
+            if (points.size() >= 5) {
+                double[] semicircleParams = calculateSemicircle(points);
 
-            double radius = semicircleParams[0];
-            double centerX = semicircleParams[1];
-            double centerY = semicircleParams[2];
+                double radius = semicircleParams[0];
+                double centerX = semicircleParams[1];
+                double centerY = semicircleParams[2];
 
-            System.out.println("Semicircle parameters:");
-            System.out.println("Radius: " + radius);
-            System.out.println("Center X: " + centerX);
-            System.out.println("Center Y: " + centerY);
+                System.out.println("Semicircle parameters:");
+                System.out.println("Radius: " + radius);
+                System.out.println("Center X: " + centerX);
+                System.out.println("Center Y: " + centerY);
+            }
         }
     }
 
