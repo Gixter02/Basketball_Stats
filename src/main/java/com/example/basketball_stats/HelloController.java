@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class HelloController {
     @FXML
@@ -260,56 +261,65 @@ public class HelloController {
                     String eventType = controller.getStringFromSelectedButton();
                     String quarter = quarterComboBox.getValue();
                     String whoDidIt = controller.getStringFromTextField();
-                    Point eventLocation = new Point(x, y);
-                    OurEvent ourEvent = new OurEvent(eventType, whoDidIt, quarter.substring(0, 1), x, y);
+                    boolean isPresent = false;
+                    for(Player player : players){
+                        if(player.getPlayerNumber().equals(Integer.valueOf(whoDidIt))){
+                            isPresent = true;
+                        }
+                    }
+                    if(isPresent) {
+                        Point eventLocation = new Point(x, y);
+                        OurEvent ourEvent = new OurEvent(eventType, whoDidIt, quarter.substring(0, 1), x, y);
                 /*System.out.println("Premuto il bottone ok");
                 System.out.println(controller.getStringFromTextField());
                 System.out.println(controller.getStringFromSelectedButton());*/
-                    ourEvents.add(ourEvent);
-                    for (OurEvent o : ourEvents) {
-                        System.out.print(o + " ;");
-                    }
-                    System.out.println();
-                    modifyStatistics(eventType, eventLocation);
-                    //Player mattia = new Player("Mattia","Montanari",12);
-                    //players.add(mattia);
-                    for (Player player : players) {
-                        if (player.getPlayerNumber().equals(Integer.valueOf(ourEvent.getWhoDidIt()))) {
-                            switch (eventType) {
-                                case "Made Shot" -> {
-                                    if (calculateDistance(eventLocation, basket) < 247) {
-                                        player.setAttemptedTwoPointers(player.getAttemptedTwoPointers() + 1);
-                                        player.setMadeTwoPointers(player.getMadeTwoPointers() + 1);
-                                    } else {
-                                        player.setAttemptedThreePointers(player.getAttemptedThreePointers() + 1);
-                                        player.setMadeThreePointers(player.getMadeThreePointers() + 1);
-                                    }
-                                }
-                                case "Missed Shot" -> {
-                                    if (calculateDistance(eventLocation, basket) < 247) {
-                                        player.setAttemptedTwoPointers(player.getAttemptedTwoPointers() + 1);
-                                    } else {
-                                        player.setAttemptedThreePointers(player.getAttemptedThreePointers() + 1);
-                                    }
-                                }
-                                case "Made FreeThrows" -> {
-                                    player.setAttemptedFreeThrows(player.getAttemptedFreeThrows() + 1);
-                                    player.setMadeFreeThrows(player.getMadeFreeThrows() + 1);
-                                }
-                                case "Missed FreeThrows" -> player.setAttemptedFreeThrows(player.getAttemptedFreeThrows() + 1);
-                                case "Defensive Rebound" -> player.setDefensiveRebounds(player.getDefensiveRebounds() + 1);
-                                case "Offensive Rebound" -> player.setOffensiveRebounds(player.getOffensiveRebounds() + 1);
-                                case "Assist" -> player.setAssists(player.getAssists() + 1);
-                                case "Block" -> player.setBlocks(player.getBlocks() + 1);
-                                case "Foul" -> player.setFouls(player.getFouls() + 1);
-                                case "Turnover" -> player.setTurnOver(player.getTurnOver() + 1);
-                                case "Steal" -> player.setSteals(player.getSteals() + 1);
-                            }
-                            //System.out.println(player.toString());
+                        ourEvents.add(ourEvent);
+                        for (OurEvent o : ourEvents) {
+                            System.out.print(o + " ;");
                         }
+                        System.out.println();
+                        modifyStatistics(eventType, eventLocation);
+                        //Player mattia = new Player("Mattia","Montanari",12);
+                        //players.add(mattia);
+                        for (Player player : players) {
+                            if (player.getPlayerNumber().equals(Integer.valueOf(ourEvent.getWhoDidIt()))) {
+                                switch (eventType) {
+                                    case "Made Shot" -> {
+                                        if (calculateDistance(eventLocation, basket) < 247) {
+                                            player.setAttemptedTwoPointers(player.getAttemptedTwoPointers() + 1);
+                                            player.setMadeTwoPointers(player.getMadeTwoPointers() + 1);
+                                        } else {
+                                            player.setAttemptedThreePointers(player.getAttemptedThreePointers() + 1);
+                                            player.setMadeThreePointers(player.getMadeThreePointers() + 1);
+                                        }
+                                    }
+                                    case "Missed Shot" -> {
+                                        if (calculateDistance(eventLocation, basket) < 247) {
+                                            player.setAttemptedTwoPointers(player.getAttemptedTwoPointers() + 1);
+                                        } else {
+                                            player.setAttemptedThreePointers(player.getAttemptedThreePointers() + 1);
+                                        }
+                                    }
+                                    case "Made FreeThrows" -> {
+                                        player.setAttemptedFreeThrows(player.getAttemptedFreeThrows() + 1);
+                                        player.setMadeFreeThrows(player.getMadeFreeThrows() + 1);
+                                    }
+                                    case "Missed FreeThrows" -> player.setAttemptedFreeThrows(player.getAttemptedFreeThrows() + 1);
+                                    case "Defensive Rebound" -> player.setDefensiveRebounds(player.getDefensiveRebounds() + 1);
+                                    case "Offensive Rebound" -> player.setOffensiveRebounds(player.getOffensiveRebounds() + 1);
+                                    case "Assist" -> player.setAssists(player.getAssists() + 1);
+                                    case "Block" -> player.setBlocks(player.getBlocks() + 1);
+                                    case "Foul" -> player.setFouls(player.getFouls() + 1);
+                                    case "Turnover" -> player.setTurnOver(player.getTurnOver() + 1);
+                                    case "Steal" -> player.setSteals(player.getSteals() + 1);
+                                }
+                                //System.out.println(player.toString());
+                            }
+                        }
+                        updateStatistics();
+                    }else{
+                        new Alert(Alert.AlertType.ERROR, "Player not in the team").showAndWait();
                     }
-                    updateStatistics();
-
                 }
             } catch (NoSuchElementException e) {
                 //showNoQuarterSelectedAlert();
