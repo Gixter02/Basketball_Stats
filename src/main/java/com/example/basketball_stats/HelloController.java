@@ -66,6 +66,25 @@ public class HelloController {
     private Label twoPointersShotLabel;
     @FXML
     private Label foulsLabel;
+    @FXML
+    private MenuItem firstHalfMenuItem;
+
+    @FXML
+    private MenuItem firstQuarterMenuItem;
+    @FXML
+    private MenuItem fourthQuarterMenuItem;
+    @FXML
+    private MenuItem gameMenuItem;
+
+    @FXML
+    private MenuItem secondHalfMenuItem;
+
+    @FXML
+    private MenuItem secondQuarterMenuItem;
+    @FXML
+    private MenuItem thirdQuarterMenuItem;
+
+
 
 
     public int attempted2PointsShot;
@@ -499,6 +518,60 @@ public class HelloController {
         }
     }
 
+    @FXML
+    void showStatistics(ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("statistics-view.fxml"));
+            DialogPane view = loader.load();
+            StatisticsDialogController controller = loader.getController();
+
+            // Set the person into the controller.
+            //int selectedIndex = selectedIndex();
+            //controller.setPerson(new Person(personTable.getItems().get(selectedIndex)));
+
+            // Create the dialog
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Statistics");
+            dialog.initModality(Modality.WINDOW_MODAL);
+            dialog.setDialogPane(view);
+
+            // Show the dialog and wait until the user closes it
+            Optional<ButtonType> clickedButton = dialog.showAndWait();
+            String selection = "ero la selezione";
+
+            switch (selection){
+                case "1°Q" ->{
+                    controller.setChart(0,0,0,0,countEvents("Made FreeThrows","1"),1);
+                }
+                case "2°Q" ->{
+
+                }
+                case "3°Q" ->{
+
+                }
+                case "4°Q" ->{
+
+                }
+                case "First Half" ->{
+
+                }
+                case "Second Half" ->{
+
+                }
+                case "Game" ->{
+
+                }
+            }
+            if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK){
+
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
@@ -554,4 +627,8 @@ public class HelloController {
         return Math.sqrt(dx * dx + dy * dy);
     }
 
+    Integer countEvents(String eventType, String quarter){
+        long l =ourEvents.stream().filter(e-> eventType.equals(e.geteventType()) && quarter.equals(e.getQuarter())).count();
+        return (int) l;
+    }
 }

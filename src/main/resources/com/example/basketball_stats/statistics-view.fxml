@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="826.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.basketball_stats.StatisticsDialogController">
+    <expandableContent>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
+    </expandableContent>
+   <content>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="488.0" prefWidth="802.0">
+               <children>
+                  <PieChart fx:id="twoPointerChart" layoutX="441.0" layoutY="14.0" prefHeight="128.0" prefWidth="146.0" title="twoPointer" />
+                  <Label layoutX="41.0" layoutY="69.0" text="2Pointer :" />
+                  <Label fx:id="twoPointerLabel" layoutX="99.0" layoutY="69.0" text="Label" />
+                  <PieChart fx:id="threePointerChart" layoutX="441.0" layoutY="157.0" prefHeight="174.0" prefWidth="174.0" title="threePointer" />
+                  <PieChart fx:id="freeThrowsChart" layoutX="441.0" layoutY="325.0" prefHeight="162.0" prefWidth="168.0" title="freeThrows" />
+                  <Label layoutX="41.0" layoutY="227.0" text="3Pointer :" />
+                  <Label fx:id="threePointerLabel" layoutX="99.0" layoutY="227.0" text="Label" />
+                  <Label layoutX="41.0" layoutY="397.0" text="FreeThrows :" />
+                  <Label fx:id="freeThrowsLabel" layoutX="113.0" layoutY="397.0" text="Label" />
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </content>
+</DialogPane>
