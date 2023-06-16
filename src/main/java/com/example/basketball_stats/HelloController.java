@@ -30,6 +30,8 @@ import java.util.stream.Collectors;
 
 public class HelloController {
     @FXML
+    private Label pointsLabel;
+    @FXML
     private Label assistsLabel;
 
     @FXML
@@ -114,7 +116,7 @@ public class HelloController {
     public int turnovers;
     public int blocks;
     public int fouls;
-
+    public int totalPoints;
     public double x = 0.0;
     public double y = 0.0;
 
@@ -154,6 +156,7 @@ public class HelloController {
         turnovers = 0;
         blocks = 0;
         fouls = 0;
+        totalPoints = 0;
 
         // For numbers on court
         GraphicsContext gc = canvasUponCourt.getGraphicsContext2D();
@@ -171,6 +174,7 @@ public class HelloController {
         turnoversLabel.setText(String.valueOf(turnovers));
         blocksLabel.setText(String.valueOf(blocks));
         foulsLabel.setText(String.valueOf(fouls));
+        pointsLabel.setText(String.valueOf(totalPoints));
 
         setChart(made2PointsShot, attempted2PointsShot, made3PointsShot, attempted3PointsShot, madeFreeThrows, attemptedFreeThrows);
     }
@@ -221,6 +225,7 @@ public class HelloController {
     void made2PShot() {
         attempted2PointsShot++;
         made2PointsShot++;
+        totalPoints += 2;
    }
 
 
@@ -231,6 +236,7 @@ public class HelloController {
     void made3PShot() {
         attempted3PointsShot++;
         made3PointsShot++;
+        totalPoints += 3;
         }
 
 
@@ -241,6 +247,7 @@ public class HelloController {
     void madeFreeThrow() {
         attemptedFreeThrows++;
         madeFreeThrows++;
+        totalPoints += 1;
         }
 
 
