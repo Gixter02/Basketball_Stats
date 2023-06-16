@@ -540,7 +540,7 @@ public class HelloController {
 
             File file = fileChooser.showSaveDialog(null);
             if(file != null) {
-                String filePath = file.getPath() + ".csv";
+                String filePath = file.getPath();
                 System.out.println(filePath);
 
                 BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
