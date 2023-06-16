@@ -8,17 +8,20 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -67,6 +70,15 @@ public class HelloController {
     @FXML
     private Label foulsLabel;
 
+    // For numbers on court
+    @FXML
+    private Canvas canvasUponCourt;
+    @FXML
+    private AnchorPane courtAnchorPane;
+    List<GraphicsContext> graphicsContextList;
+    Color color;
+
+    
 
     public int attempted2PointsShot;
     public int made2PointsShot;
@@ -85,7 +97,8 @@ public class HelloController {
     public double x = 0.0;
     public double y = 0.0;
 
-    Point basket = new Point(275, 8);
+    Point BASKET = new Point(300, 8);
+    static final int RADIUS = 270;
 
     ArrayList<Point> points;
     ArrayList<OurEvent> ourEvents;
@@ -98,9 +111,12 @@ public class HelloController {
         quarterComboBox.getItems().addAll("1°Q","2°Q","3°Q","4°Q");
         points = new ArrayList<>();
         ourEvents = new ArrayList<>();
-        players = new LinkedList<>();
+        players = new LinkedList<Player>();
         resetStatistics();
         updateStatistics();
+
+        // For numbers on court
+        graphicsContextList = new ArrayList<>();
 
     }
     void resetStatistics(){
@@ -117,6 +133,11 @@ public class HelloController {
         turnovers = 0;
         blocks = 0;
         fouls = 0;
+
+        // For numbers on court
+        GraphicsContext gc = canvasUponCourt.getGraphicsContext2D();
+        gc.clearRect(0, 0, canvasUponCourt.getWidth(), canvasUponCourt.getHeight());
+
     }
     void updateStatistics(){
         twoPointersShotLabel.setText(String.valueOf(made2PointsShot) + "/" + String.valueOf(attempted2PointsShot));
@@ -133,14 +154,14 @@ public class HelloController {
     void modifyStatistics(String eventType, Point eventLocation){
         switch (eventType) {
             case "Made Shot" -> {
-                if (calculateDistance(eventLocation, basket) < 247) {
+                if (calculateDistance(eventLocation, BASKET) < RADIUS) {
                     made2PShot();
                 } else {
                     made3PShot();
                 }
             }
             case "Missed Shot" -> {
-                if (calculateDistance(eventLocation, basket) < 247) {
+                if (calculateDistance(eventLocation, BASKET) < RADIUS) {
                     missed2PShot();
                 } else {
                     missed3PShot();
@@ -166,6 +187,8 @@ public class HelloController {
                 String eventType = ourEvent.geteventType();
                 Point eventLocation = new Point(ourEvent.getX(), ourEvent.getY());
                 modifyStatistics(eventType, eventLocation);
+                // For numbers on court
+                drawNumbersIfRequired(ourEvent);
             }
         }
         updateStatistics();
@@ -270,9 +293,9 @@ public class HelloController {
                     if(isPresent) {
                         Point eventLocation = new Point(x, y);
                         OurEvent ourEvent = new OurEvent(eventType, whoDidIt, quarter.substring(0, 1), x, y);
-                /*System.out.println("Premuto il bottone ok");
-                System.out.println(controller.getStringFromTextField());
-                System.out.println(controller.getStringFromSelectedButton());*/
+                        /*System.out.println("Premuto il bottone ok");
+                        System.out.println(controller.getStringFromTextField());
+                        System.out.println(controller.getStringFromSelectedButton());*/
                         ourEvents.add(ourEvent);
                         for (OurEvent o : ourEvents) {
                             System.out.print(o + " ;");
@@ -285,7 +308,7 @@ public class HelloController {
                             if (player.getPlayerNumber().equals(Integer.valueOf(ourEvent.getWhoDidIt()))) {
                                 switch (eventType) {
                                     case "Made Shot" -> {
-                                        if (calculateDistance(eventLocation, basket) < 247) {
+                                        if (calculateDistance(eventLocation, BASKET) < RADIUS) {
                                             player.setAttemptedTwoPointers(player.getAttemptedTwoPointers() + 1);
                                             player.setMadeTwoPointers(player.getMadeTwoPointers() + 1);
                                         } else {
@@ -294,7 +317,7 @@ public class HelloController {
                                         }
                                     }
                                     case "Missed Shot" -> {
-                                        if (calculateDistance(eventLocation, basket) < 247) {
+                                        if (calculateDistance(eventLocation, BASKET) < RADIUS) {
                                             player.setAttemptedTwoPointers(player.getAttemptedTwoPointers() + 1);
                                         } else {
                                             player.setAttemptedThreePointers(player.getAttemptedThreePointers() + 1);
@@ -317,7 +340,14 @@ public class HelloController {
                             }
                         }
                         updateStatistics();
-                    }else{
+
+                        // For numbers on court
+                        drawNumbersIfRequired(ourEvent);
+
+
+
+                    }
+                    else{
                         new Alert(Alert.AlertType.ERROR, "Player not in the team").showAndWait();
                     }
                 }
@@ -331,7 +361,7 @@ public class HelloController {
 
 
         /*
-        if(calculateDistance(point,basket) < 247){
+        if(calculateDistance(point,BASKET) < RADIUS){
             made2PShot();
             updateStatistics();
         }
@@ -355,6 +385,21 @@ public class HelloController {
                 System.out.println("Center X: " + centerX);
                 System.out.println("Center Y: " + centerY);
             }
+        }
+    }
+
+    void drawNumbersIfRequired(OurEvent ourEvent) {
+        if(ourEvent.geteventType().equals("Made Shot") || ourEvent.geteventType().equals("Missed Shot")){
+            GraphicsContext gc = canvasUponCourt.getGraphicsContext2D();
+            gc.setFont(Font.font("Arial", FontWeight.NORMAL, 20));
+            if(ourEvent.geteventType().equals("Made Shot")) {
+                color = Color.GREEN;
+            }
+            else if(ourEvent.geteventType().equals("Missed Shot")) {
+                color = Color.RED;
+            }
+            gc.setFill(color);
+            gc.fillText(ourEvent.getWhoDidIt(), ourEvent.getX(), ourEvent.getY());
         }
     }
 
@@ -416,9 +461,13 @@ public class HelloController {
                 ObjectMapper mapper = new ObjectMapper();
                 mapper.registerModule(new JavaTimeModule());
                 players = mapper.readValue(file, players.getClass());
-                //personTable.getItems().addAll(persons);
-                //players = new LinkedList<>(playersTmp);
                 System.out.println(players);
+
+                //mapper.registerModule(new JavaTimeModule());
+                //players = mapper.readValue(file, players.getClass());
+                ////personTable.getItems().addAll(persons);
+                ////players = new LinkedList<>(playersTmp);
+                //System.out.println(players);
             }
         } catch (IOException e) {
             new Alert(Alert.AlertType.ERROR, "Could not load data").showAndWait();

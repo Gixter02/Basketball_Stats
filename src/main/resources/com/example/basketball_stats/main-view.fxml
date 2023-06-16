@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -7,8 +8,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
@@ -117,10 +116,10 @@
       </ScrollPane>
    </right>
    <center>
-      <ImageView fx:id="courtImage" fitWidth="550.0" onMouseClicked="#handleClick" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="@images/halfcourt-transformed.jpeg" />
-         </image>
-      </ImageView>
+      <AnchorPane fx:id="courtAnchorPane" styleClass="courtAnchorPane" stylesheets="@halfcourt-backgroung.css" BorderPane.alignment="CENTER">
+         <children>
+            <Canvas fx:id="canvasUponCourt" height="572.0" layoutX="1.0" layoutY="1.0" onMouseClicked="#handleClick" width="598.0" />
+         </children>
+      </AnchorPane>
    </center>
 </BorderPane>

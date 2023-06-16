@@ -1,0 +1,4 @@
+.courtAnchorPane{
+-fx-background-image:url('./images/halfcourt-transformed.jpeg');
+-fx-background-size:cover;
+}
