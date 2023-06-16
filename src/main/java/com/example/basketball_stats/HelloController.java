@@ -587,27 +587,50 @@ public class HelloController {
 
 
     void setChart(Integer twoPointerMade, Integer twoPointerAttempted,Integer threePointerMade, Integer threePointerAttempted, Integer freeThrowsMade, Integer freeThrowsAttempted) {
-        twoPointerPieChartData.clear();
-        twoPointerPieChartData =
-                FXCollections.observableArrayList(
-                        new PieChart.Data("Made", twoPointerMade),
-                        new PieChart.Data("Missed", twoPointerAttempted - twoPointerMade)
-                );
-        twoPointersShotPieChart.setData(twoPointerPieChartData);
-        threePointerPieChartData.clear();
-        threePointerPieChartData =
-                FXCollections.observableArrayList(
-                        new PieChart.Data("Made", threePointerMade),
-                        new PieChart.Data("Missed", threePointerAttempted - threePointerMade)
-                );
-        threePointersShotPieChart.setData(threePointerPieChartData);
-        freeThrowsPieChartData.clear();
-        freeThrowsPieChartData =
-                FXCollections.observableArrayList(
-                        new PieChart.Data("Made", freeThrowsMade),
-                        new PieChart.Data("Missed", freeThrowsAttempted - freeThrowsMade)
-                );
-        freeThrowsPieChart.setData(freeThrowsPieChartData);
+        PieChart.Data made = new PieChart.Data("Made", twoPointerMade);
+        PieChart.Data missed = new PieChart.Data("Missed", twoPointerAttempted - twoPointerMade);
+
+            twoPointerPieChartData.clear();
+            twoPointerPieChartData =
+                    FXCollections.observableArrayList(
+                            made,
+                            missed
+                    );
+
+            twoPointersShotPieChart.setData(twoPointerPieChartData);
+            made.getNode().setStyle("-fx-pie-color: #00FF00;"); //GREEN
+            missed.getNode().setStyle("-fx-pie-color: #FF0000;"); //RED
+
+
+            made = new PieChart.Data("Made", threePointerMade);
+            missed = new PieChart.Data("Missed", threePointerAttempted - threePointerMade);
+
+            threePointerPieChartData.clear();
+            threePointerPieChartData =
+                    FXCollections.observableArrayList(
+                            made,
+                            missed
+                    );
+
+            threePointersShotPieChart.setData(threePointerPieChartData);
+            made.getNode().setStyle("-fx-pie-color: #00FF00;"); //GREEN
+            missed.getNode().setStyle("-fx-pie-color: #FF0000;"); //RED
+
+
+            made = new PieChart.Data("Made", freeThrowsMade);
+            missed = new PieChart.Data("Missed", freeThrowsAttempted - freeThrowsMade);
+
+            freeThrowsPieChartData.clear();
+            freeThrowsPieChartData =
+                    FXCollections.observableArrayList(
+                            made,
+                            missed
+                    );
+
+            freeThrowsPieChart.setData(freeThrowsPieChartData);
+            made.getNode().setStyle("-fx-pie-color: #00FF00;"); //GREEN
+            missed.getNode().setStyle("-fx-pie-color: #FF0000;"); //RED
+
     }
 
 
