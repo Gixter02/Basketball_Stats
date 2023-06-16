@@ -5,6 +5,8 @@ import com.example.basketball_stats.classes.Player;
 import com.example.basketball_stats.classes.Point;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,10 +74,17 @@ public class HelloController {
     @FXML
     private AnchorPane courtAnchorPane;
     @FXML
-    private PieChart twoPointersShotPieChart;
+    private PieChart twoPointersShotPieChart = new PieChart();
     List<GraphicsContext> graphicsContextList;
     Color color;
 
+
+
+    ObservableList<PieChart.Data> twoPointerPieChartData =
+            FXCollections.observableArrayList(
+                    new PieChart.Data("Made", 13),
+                    new PieChart.Data("Missed", 25)
+            );
     
 
     public int attempted2PointsShot;
@@ -148,6 +157,8 @@ public class HelloController {
         turnoversLabel.setText(String.valueOf(turnovers));
         blocksLabel.setText(String.valueOf(blocks));
         foulsLabel.setText(String.valueOf(fouls));
+
+        setChart(made2PointsShot, attempted2PointsShot, made3PointsShot, attempted3PointsShot, madeFreeThrows, attemptedFreeThrows);
     }
     void modifyStatistics(String eventType, Point eventLocation){
         switch (eventType) {
@@ -548,6 +559,15 @@ public class HelloController {
 
 
 
+    void setChart(Integer twoPointerMade, Integer twoPointerAttempted,Integer threePointerMade, Integer threePointerAttempted, Integer freeThrowsMade, Integer freeThrowsAttempted) {
+        twoPointerPieChartData.clear();
+        twoPointerPieChartData =
+                FXCollections.observableArrayList(
+                        new PieChart.Data("Made", twoPointerMade),
+                        new PieChart.Data("Missed", twoPointerAttempted - twoPointerMade)
+                );
+        twoPointersShotPieChart.setData(twoPointerPieChartData);
+    }
 
 
 
