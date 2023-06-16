@@ -75,12 +75,26 @@ public class HelloController {
     private AnchorPane courtAnchorPane;
     @FXML
     private PieChart twoPointersShotPieChart = new PieChart();
+    @FXML
+    private PieChart threePointersShotPieChart = new PieChart();
+    @FXML
+    private PieChart freeThrowsPieChart = new PieChart();
     List<GraphicsContext> graphicsContextList;
     Color color;
 
 
 
     ObservableList<PieChart.Data> twoPointerPieChartData =
+            FXCollections.observableArrayList(
+                    new PieChart.Data("Made", 13),
+                    new PieChart.Data("Missed", 25)
+            );
+    ObservableList<PieChart.Data> threePointerPieChartData =
+            FXCollections.observableArrayList(
+                    new PieChart.Data("Made", 13),
+                    new PieChart.Data("Missed", 25)
+            );
+    ObservableList<PieChart.Data> freeThrowsPieChartData =
             FXCollections.observableArrayList(
                     new PieChart.Data("Made", 13),
                     new PieChart.Data("Missed", 25)
@@ -567,6 +581,20 @@ public class HelloController {
                         new PieChart.Data("Missed", twoPointerAttempted - twoPointerMade)
                 );
         twoPointersShotPieChart.setData(twoPointerPieChartData);
+        threePointerPieChartData.clear();
+        threePointerPieChartData =
+                FXCollections.observableArrayList(
+                        new PieChart.Data("Made", threePointerMade),
+                        new PieChart.Data("Missed", threePointerAttempted - threePointerMade)
+                );
+        threePointersShotPieChart.setData(threePointerPieChartData);
+        freeThrowsPieChartData.clear();
+        freeThrowsPieChartData =
+                FXCollections.observableArrayList(
+                        new PieChart.Data("Made", freeThrowsMade),
+                        new PieChart.Data("Missed", freeThrowsAttempted - freeThrowsMade)
+                );
+        freeThrowsPieChart.setData(freeThrowsPieChartData);
     }
 
 

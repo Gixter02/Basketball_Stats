@@ -122,7 +122,9 @@
                   <Label layoutX="19.0" layoutY="5.0" text="Quarter" />
                   <Label layoutX="16.0" layoutY="286.0" text="Fouls :" />
                   <Label fx:id="foulsLabel" layoutX="56.0" layoutY="286.0" text="Label" />
-                  <PieChart fx:id="twoPointersShotPieChart" layoutX="-12.0" layoutY="305.0" prefHeight="121.0" prefWidth="169.0" />
+                  <PieChart fx:id="twoPointersShotPieChart" layoutY="295.0" prefHeight="121.0" prefWidth="169.0" />
+                  <PieChart fx:id="threePointersShotPieChart" layoutX="-2.0" layoutY="365.0" prefHeight="144.0" prefWidth="179.0" />
+                  <PieChart fx:id="freeThrowsPieChart" layoutX="-2.0" layoutY="438.0" prefHeight="150.0" prefWidth="144.0" />
                </children>
             </AnchorPane>
          </content>
