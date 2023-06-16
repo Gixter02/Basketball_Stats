@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.basketball_stats.HelloController">
+<BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="1048.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.basketball_stats.HelloController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -84,12 +84,27 @@
    <right>
       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
+            <AnchorPane prefHeight="200.0" prefWidth="193.0" />
+         </content>
+      </ScrollPane>
+   </right>
+   <center>
+      <AnchorPane fx:id="courtAnchorPane" prefHeight="484.0" prefWidth="302.0" styleClass="courtAnchorPane" stylesheets="@halfcourt-backgroung.css" BorderPane.alignment="CENTER">
+         <children>
+            <Canvas fx:id="canvasUponCourt" height="606.0" layoutX="1.0" layoutY="1.0" onMouseClicked="#handleClick" width="653.0" />
+         </children>
+      </AnchorPane>
+   </center>
+   <left>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
             <AnchorPane prefHeight="571.0" prefWidth="183.0">
                <children>
                   <ComboBox fx:id="quarterComboBox" layoutX="14.0" layoutY="27.0" onAction="#selectQuarter" />
                   <Label layoutX="14.0" layoutY="58.0" text="2P :" />
                   <Label layoutX="14.0" layoutY="83.0" text="3P :" />
                   <Label layoutX="14.0" layoutY="110.0" text="Free Throws :" />
+                  <Label fx:id="assistsLabel" layoutX="59.0" layoutY="239.0" text="Label" />
                   <Label layoutX="14.0" layoutY="136.0" text="OR :" />
                   <Label layoutX="14.0" layoutY="162.0" text="DR :" />
                   <Label layoutX="14.0" layoutY="188.0" text="Steals :" />
@@ -103,23 +118,14 @@
                   <Label fx:id="defensiveReboundLabel" layoutX="43.0" layoutY="162.0" text="Label" />
                   <Label fx:id="stealsLabel" layoutX="56.0" layoutY="188.0" text="Label" />
                   <Label fx:id="turnoversLabel" layoutX="84.0" layoutY="213.0" text="Label" />
-                  <Label fx:id="assistsLabel" layoutX="59.0" layoutY="239.0" text="Label" />
                   <Label fx:id="blocksLabel" layoutX="58.0" layoutY="264.0" text="Label" />
                   <Label layoutX="19.0" layoutY="5.0" text="Quarter" />
-                  <Button fx:id="made2Shot" layoutX="19.0" layoutY="337.0" mnemonicParsing="false" text="2Pmade" />
-                  <Button fx:id="missed2Shot" layoutX="100.0" layoutY="337.0" mnemonicParsing="false" text="2Pmissed" />
                   <Label layoutX="16.0" layoutY="286.0" text="Fouls :" />
                   <Label fx:id="foulsLabel" layoutX="56.0" layoutY="286.0" text="Label" />
+                  <PieChart fx:id="twoPointersShotPieChart" layoutX="-12.0" layoutY="305.0" prefHeight="121.0" prefWidth="169.0" />
                </children>
             </AnchorPane>
          </content>
       </ScrollPane>
-   </right>
-   <center>
-      <AnchorPane fx:id="courtAnchorPane" styleClass="courtAnchorPane" stylesheets="@halfcourt-backgroung.css" BorderPane.alignment="CENTER">
-         <children>
-            <Canvas fx:id="canvasUponCourt" height="572.0" layoutX="1.0" layoutY="1.0" onMouseClicked="#handleClick" width="598.0" />
-         </children>
-      </AnchorPane>
-   </center>
+   </left>
 </BorderPane>

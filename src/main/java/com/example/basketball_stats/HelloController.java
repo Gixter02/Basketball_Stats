@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -44,11 +45,6 @@ public class HelloController {
     @FXML
     private Label freeThrowsLabel;
 
-    @FXML
-    private Button made2Shot;
-
-    @FXML
-    private Button missed2Shot;
 
     @FXML
     private Label offensiveReboundLabel;
@@ -75,6 +71,8 @@ public class HelloController {
     private Canvas canvasUponCourt;
     @FXML
     private AnchorPane courtAnchorPane;
+    @FXML
+    private PieChart twoPointersShotPieChart;
     List<GraphicsContext> graphicsContextList;
     Color color;
 
