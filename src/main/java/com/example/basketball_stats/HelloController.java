@@ -464,8 +464,14 @@ public class HelloController {
             // Show the dialog and wait until the user closes it
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.FINISH){
-                players = controller.getListOfPlayers();
-                System.out.println(players);
+                //if(controller.getListOfPlayers().size() != controller.getNumberOfPlayersToAdd()){
+                //    new Alert(Alert.AlertType.ERROR, "Wrong Number of Players Added").showAndWait();
+                //    handleNewTeam(new ActionEvent());
+                //}else{
+                    players = controller.getListOfPlayers();
+                    System.out.println(players);
+                //}
+
             }
 
         } catch (IOException e) {
