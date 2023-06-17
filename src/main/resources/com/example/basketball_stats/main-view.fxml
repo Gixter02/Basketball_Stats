@@ -2,6 +2,7 @@
 
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -10,6 +11,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="1048.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.basketball_stats.HelloController">
    <top>
@@ -19,8 +21,8 @@
             <items>
                   <Menu mnemonicParsing="false" text="New">
                     <items>
-                      <MenuItem mnemonicParsing="false" onAction="#handleNewGame" text="New Game (reset statistics)" />
                         <MenuItem mnemonicParsing="false" onAction="#handleNewTeam" text="Create Team..." />
+                      <MenuItem mnemonicParsing="false" onAction="#handleNewGame" text="New Game (reset statistics)" />
                     </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Open">
@@ -84,14 +86,57 @@
    <right>
       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <AnchorPane prefHeight="200.0" prefWidth="193.0" />
+            <AnchorPane prefHeight="604.0" prefWidth="198.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" text="Players">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="196.0" text="Actions">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="Player0" layoutX="14.0" layoutY="45.0" mnemonicParsing="false" onMouseClicked="#handlePlayerButtonClicked" prefHeight="24.0" prefWidth="46.0" text="100" />
+                  <Button fx:id="Player1" layoutX="76.0" layoutY="45.0" mnemonicParsing="false" onMouseClicked="#handlePlayerButtonClicked" prefHeight="24.0" prefWidth="46.0" text="100" />
+                  <Button fx:id="Player2" layoutX="138.0" layoutY="45.0" mnemonicParsing="false" onMouseClicked="#handlePlayerButtonClicked" prefHeight="24.0" prefWidth="46.0" text="100" />
+                  <Button fx:id="Player3" layoutX="14.0" layoutY="79.0" mnemonicParsing="false" onMouseClicked="#handlePlayerButtonClicked" prefHeight="24.0" prefWidth="46.0" text="100" />
+                  <Button fx:id="Player4" layoutX="76.0" layoutY="79.0" mnemonicParsing="false" onMouseClicked="#handlePlayerButtonClicked" prefHeight="24.0" prefWidth="46.0" text="100" />
+                  <Button fx:id="Player5" layoutX="138.0" layoutY="79.0" mnemonicParsing="false" onMouseClicked="#handlePlayerButtonClicked" prefHeight="24.0" prefWidth="46.0" text="100" />
+                  <Button fx:id="Player6" layoutX="14.0" layoutY="112.0" mnemonicParsing="false" onMouseClicked="#handlePlayerButtonClicked" prefHeight="24.0" prefWidth="46.0" text="100" />
+                  <Button fx:id="Player7" layoutX="76.0" layoutY="112.0" mnemonicParsing="false" onMouseClicked="#handlePlayerButtonClicked" prefHeight="24.0" prefWidth="46.0" text="100" />
+                  <Button fx:id="Player8" layoutX="138.0" layoutY="112.0" mnemonicParsing="false" onMouseClicked="#handlePlayerButtonClicked" prefHeight="24.0" prefWidth="46.0" text="100" />
+                  <Button fx:id="Player9" layoutX="14.0" layoutY="146.0" mnemonicParsing="false" onMouseClicked="#handlePlayerButtonClicked" prefHeight="24.0" prefWidth="46.0" text="100" />
+                  <Button fx:id="Player10" layoutX="76.0" layoutY="146.0" mnemonicParsing="false" onMouseClicked="#handlePlayerButtonClicked" prefHeight="24.0" prefWidth="46.0" text="100" />
+                  <Button fx:id="Player11" layoutX="138.0" layoutY="146.0" mnemonicParsing="false" onMouseClicked="#handlePlayerButtonClicked" prefHeight="24.0" prefWidth="46.0" text="100" />
+                  <Button layoutX="15.0" layoutY="245.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Made S" />
+                  <Label layoutX="14.0" layoutY="222.0" text="Shots" />
+                  <Label layoutX="14.0" layoutY="322.0" text="Rebounds" />
+                  <Button layoutX="104.0" layoutY="245.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Missed S" />
+                  <Button layoutX="15.0" layoutY="278.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Made FT" />
+                  <Button layoutX="104.0" layoutY="278.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Missed FT" />
+                  <Label layoutX="16.0" layoutY="391.0" text="Other" />
+                  <Button layoutX="15.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Off R" />
+                  <Button layoutX="104.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Def R" />
+                  <Button layoutX="17.0" layoutY="414.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Assist" />
+                  <Button layoutX="106.0" layoutY="414.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Block" />
+                  <Button layoutX="17.0" layoutY="447.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Foul" />
+                  <Button layoutX="106.0" layoutY="447.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Steal" />
+                  <Button layoutX="17.0" layoutY="481.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Turnover" />
+                  <Button layoutX="43.0" layoutY="548.0" mnemonicParsing="false" onMouseClicked="#handleInsertActionClick" text="Insert Action">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children></AnchorPane>
          </content>
       </ScrollPane>
    </right>
    <center>
       <AnchorPane fx:id="courtAnchorPane" prefHeight="484.0" prefWidth="302.0" styleClass="courtAnchorPane" stylesheets="@halfcourt-backgroung.css" BorderPane.alignment="CENTER">
          <children>
-            <Canvas fx:id="canvasUponCourt" height="606.0" layoutX="1.0" layoutY="1.0" onMouseClicked="#handleClick" width="653.0" />
+            <Canvas fx:id="canvasUponCourt" height="606.0" layoutX="1.0" layoutY="1.0" onMouseClicked="#handleClickUponCourt" width="653.0" />
          </children>
       </AnchorPane>
    </center>

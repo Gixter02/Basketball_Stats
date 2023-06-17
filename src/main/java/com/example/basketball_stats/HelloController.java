@@ -70,6 +70,43 @@ public class HelloController {
     @FXML
     private Label foulsLabel;
 
+    @FXML
+    private Button Player0;
+
+    @FXML
+    private Button Player1;
+
+    @FXML
+    private Button Player10;
+
+    @FXML
+    private Button Player11;
+
+    @FXML
+    private Button Player2;
+
+    @FXML
+    private Button Player3;
+
+    @FXML
+    private Button Player4;
+
+    @FXML
+    private Button Player5;
+
+    @FXML
+    private Button Player6;
+
+    @FXML
+    private Button Player7;
+
+    @FXML
+    private Button Player8;
+
+    @FXML
+    private Button Player9;
+
+
     // For numbers on court
     @FXML
     private Canvas canvasUponCourt;
@@ -180,24 +217,24 @@ public class HelloController {
     }
     void modifyStatistics(String eventType, Point eventLocation){
         switch (eventType) {
-            case "Made Shot" -> {
+            case "Made S" -> {
                 if (calculateDistance(eventLocation, BASKET) < RADIUS) {
                     made2PShot();
                 } else {
                     made3PShot();
                 }
             }
-            case "Missed Shot" -> {
+            case "Missed S" -> {
                 if (calculateDistance(eventLocation, BASKET) < RADIUS) {
                     missed2PShot();
                 } else {
                     missed3PShot();
                 }
             }
-            case "Made FreeThrows" -> madeFreeThrow();
-            case "Missed FreeThrows" -> missedFreeThrow();
-            case "Defensive Rebound" -> madeDefensiveRebound();
-            case "Offensive Rebound" -> madeOffensiveRebound();
+            case "Made FT" -> madeFreeThrow();
+            case "Missed FT" -> missedFreeThrow();
+            case "Def R" -> madeDefensiveRebound();
+            case "Off R" -> madeOffensiveRebound();
             case "Assist" -> madeAssist();
             case "Block" -> madeBlock();
             case "Foul" -> madeFoul();
@@ -284,6 +321,128 @@ public class HelloController {
         alert.showAndWait();
     }
 
+    // For buttons on the right side
+    @FXML
+    void handleInsertActionClick(MouseEvent event) {
+        // If quarter not inserted, alert and return
+        if(quarterComboBox.getValue() == null) {
+            new Alert(Alert.AlertType.ERROR, "First you have to select the quarter").showAndWait();
+            return;
+        }
+        // If player or action not selected, alert and return
+        if(whoDidIt == null || eventType == null) {
+            new Alert(Alert.AlertType.ERROR, "Player or action not selected: you have to select both").showAndWait();
+            return;
+        }
+
+
+        //If all checks have been passed
+        String quarter = quarterComboBox.getValue();
+        OurEvent ourEvent = new OurEvent(eventType, whoDidIt, quarter.substring(0, 1), x, y);
+        ourEvents.add(ourEvent);
+
+        modifyStatistics(eventType, point);
+
+        for (Player player : players) {
+            if (player.getPlayerNumber().equals(Integer.valueOf(ourEvent.getWhoDidIt()))) {
+                switch (eventType) {
+                    case "Made S" -> {
+                        if (calculateDistance(point, BASKET) < RADIUS) {
+                            player.setAttemptedTwoPointers(player.getAttemptedTwoPointers() + 1);
+                            player.setMadeTwoPointers(player.getMadeTwoPointers() + 1);
+                        } else {
+                            player.setAttemptedThreePointers(player.getAttemptedThreePointers() + 1);
+                            player.setMadeThreePointers(player.getMadeThreePointers() + 1);
+                        }
+                    }
+                    case "Missed S" -> {
+                        if (calculateDistance(point, BASKET) < RADIUS) {
+                            player.setAttemptedTwoPointers(player.getAttemptedTwoPointers() + 1);
+                        } else {
+                            player.setAttemptedThreePointers(player.getAttemptedThreePointers() + 1);
+                        }
+                    }
+                    case "Made FT" -> {
+                        player.setAttemptedFreeThrows(player.getAttemptedFreeThrows() + 1);
+                        player.setMadeFreeThrows(player.getMadeFreeThrows() + 1);
+                    }
+                    case "Missed FT" -> player.setAttemptedFreeThrows(player.getAttemptedFreeThrows() + 1);
+                    case "Def R" -> player.setDefensiveRebounds(player.getDefensiveRebounds() + 1);
+                    case "Off R" -> player.setOffensiveRebounds(player.getOffensiveRebounds() + 1);
+                    case "Assist" -> player.setAssists(player.getAssists() + 1);
+                    case "Block" -> player.setBlocks(player.getBlocks() + 1);
+                    case "Foul" -> player.setFouls(player.getFouls() + 1);
+                    case "Turnover" -> player.setTurnOver(player.getTurnOver() + 1);
+                    case "Steal" -> player.setSteals(player.getSteals() + 1);
+                }
+            }
+        }
+        updateStatistics();
+
+        // For numbers on court
+        drawNumbersIfRequired(ourEvent);
+
+        // Add the selected point on court to the points array
+        points.add(point);
+
+        // Stampo l'evento per debug
+        System.out.println(ourEvent);
+
+
+        // Una volta inserita l'azione, devo resettare whoDidIt, eventType e il punto selezionato (e le coordinate)
+        whoDidIt = null;
+        eventType = null;
+        point = null;
+        x = 0.0;
+        y = 0.0;
+    }
+
+    // For buttons on the right side
+    String whoDidIt;
+    @FXML
+    void handlePlayerButtonClicked(MouseEvent event) {
+        if(quarterComboBox.getValue() == null) {
+            new Alert(Alert.AlertType.ERROR, "First you have to select the quarter").showAndWait();
+            return;
+        }
+        Button clickedButton = (Button) event.getSource();
+        whoDidIt = clickedButton.getText();
+    }
+
+    // For buttons on the right side
+    String eventType;
+    @FXML
+    void handleActionButtonClicked(MouseEvent event) {
+        if(quarterComboBox.getValue() == null) {
+            new Alert(Alert.AlertType.ERROR, "First you have to select the quarter").showAndWait();
+            return;
+        }
+        Button clickedButton = (Button) event.getSource();
+        eventType = clickedButton.getText();
+    }
+
+    // For buttons on the right side
+    Point point;
+    @FXML
+    void handleClickUponCourt(MouseEvent event) {
+        if(quarterComboBox.getValue() == null) {
+            new Alert(Alert.AlertType.ERROR, "First you have to select the quarter").showAndWait();
+            return;
+        }
+        x = event.getX();
+        y = event.getY();
+
+        point = new Point(x, y);
+
+        System.out.println(point);
+
+    }
+
+
+
+
+
+
     @FXML
     void handleClick(MouseEvent event) {
         if(quarterComboBox.getValue() != null) {
@@ -314,6 +473,7 @@ public class HelloController {
                     String eventType = controller.getStringFromSelectedButton();
                     String quarter = quarterComboBox.getValue();
                     String whoDidIt = controller.getStringFromTextField();
+                    // Nella nuova interfaccia, questo controllo non serve
                     boolean isPresent = false;
                     for(Player player : players){
                         if(player.getPlayerNumber().equals(Integer.valueOf(whoDidIt))){
@@ -419,13 +579,13 @@ public class HelloController {
     }
 
     void drawNumbersIfRequired(OurEvent ourEvent) {
-        if(ourEvent.geteventType().equals("Made Shot") || ourEvent.geteventType().equals("Missed Shot")){
+        if(ourEvent.geteventType().equals("Made S") || ourEvent.geteventType().equals("Missed S")){
             GraphicsContext gc = canvasUponCourt.getGraphicsContext2D();
             gc.setFont(Font.font("Arial", FontWeight.NORMAL, 20));
-            if(ourEvent.geteventType().equals("Made Shot")) {
+            if(ourEvent.geteventType().equals("Made S")) {
                 color = Color.GREEN;
             }
-            else if(ourEvent.geteventType().equals("Missed Shot")) {
+            else if(ourEvent.geteventType().equals("Missed S")) {
                 color = Color.RED;
             }
             gc.setFill(color);
@@ -464,13 +624,31 @@ public class HelloController {
             // Show the dialog and wait until the user closes it
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.FINISH){
-                //if(controller.getListOfPlayers().size() != controller.getNumberOfPlayersToAdd()){
-                //    new Alert(Alert.AlertType.ERROR, "Wrong Number of Players Added").showAndWait();
-                //    handleNewTeam(new ActionEvent());
-                //}else{
-                    players = controller.getListOfPlayers();
-                    System.out.println(players);
-                //}
+                players = controller.getListOfPlayers();
+                System.out.println(players);
+
+                //Metto i players nei rispettivi bottoni
+                int i=0;
+                ArrayList<Button> buttons = new ArrayList<>();
+                buttons.add(Player0);
+                buttons.add(Player1);
+                buttons.add(Player2);
+                buttons.add(Player3);
+                buttons.add(Player4);
+                buttons.add(Player5);
+                buttons.add(Player6);
+                buttons.add(Player7);
+                buttons.add(Player8);
+                buttons.add(Player9);
+                buttons.add(Player10);
+                buttons.add(Player11);
+                for(Player player : players) {
+                    Button iButton = buttons.get(i);
+                    iButton.setText(player.getPlayerNumber().toString());
+                    i++;
+                }
+
+
 
             }
 

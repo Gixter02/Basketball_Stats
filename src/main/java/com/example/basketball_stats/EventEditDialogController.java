@@ -44,12 +44,12 @@ public class EventEditDialogController {
     private Button turnoverButton;
 
     String eventType;
-    String whoDidIt;
-    OurEvent ourEvent = new OurEvent("tiro","numero", "1", 50, 50);
-    @FXML
-    public void initialize(){
-
-    }
+    //String whoDidIt;
+    //OurEvent ourEvent = new OurEvent("tiro","numero", "1", 50, 50);
+    //@FXML
+            //public void initialize(){
+                    //
+            //}
 
     public String getStringFromTextField(){
         return numberTextField.getText();
