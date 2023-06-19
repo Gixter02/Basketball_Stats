@@ -335,6 +335,11 @@ public class HelloController {
             new Alert(Alert.AlertType.ERROR, "Player or action not selected: you have to select both").showAndWait();
             return;
         }
+        //If action is a 2 or 3 pointer shot but point on court is not selected, alert and return
+        if(point == null) {
+            new Alert(Alert.AlertType.ERROR, "You have to choose a point on court before inserting a 2P or 3P shot").showAndWait();
+            return;
+        }
 
 
         //If all checks have been passed
