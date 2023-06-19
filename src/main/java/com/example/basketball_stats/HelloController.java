@@ -8,19 +8,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -29,7 +24,6 @@ import javafx.stage.Modality;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class HelloController {
     @FXML
@@ -40,11 +34,6 @@ public class HelloController {
     @FXML
     private Label blocksLabel;
 
-    @FXML
-    private BorderPane borderPane;
-
-    @FXML
-    private ImageView courtImage;
 
     @FXML
     private Label defensiveReboundLabel;
@@ -117,8 +106,6 @@ public class HelloController {
     @FXML
     private Canvas canvasUponCourt;
     @FXML
-    private AnchorPane courtAnchorPane;
-    @FXML
     private PieChart twoPointersShotPieChart = new PieChart();
     @FXML
     private PieChart threePointersShotPieChart = new PieChart();
@@ -182,7 +169,7 @@ public class HelloController {
     ArrayList<Point> points;
     ArrayList<OurEvent> ourEvents;
     LinkedList<Player> players;
-
+    ArrayList<Button> buttons;
 
     @FXML
     private void initialize() {
@@ -190,7 +177,8 @@ public class HelloController {
         quarterComboBox.getItems().addAll("1°Q","2°Q","3°Q","4°Q", "1 half", "2 half", "Game");
         points = new ArrayList<>();
         ourEvents = new ArrayList<>();
-        players = new LinkedList<Player>();
+        players = new LinkedList<>();
+        buttons = new ArrayList<>();
         resetStatistics();
         updateStatistics();
 
@@ -201,7 +189,18 @@ public class HelloController {
         madeFreeThrowButton.setStyle("-fx-background-color: #00ff00; -fx-text-fill: black;");
         madeShotButton.setStyle("-fx-background-color: #00ff00; -fx-text-fill: black;");
 
-
+        buttons.add(Player0);
+        buttons.add(Player1);
+        buttons.add(Player2);
+        buttons.add(Player3);
+        buttons.add(Player4);
+        buttons.add(Player5);
+        buttons.add(Player6);
+        buttons.add(Player7);
+        buttons.add(Player8);
+        buttons.add(Player9);
+        buttons.add(Player10);
+        buttons.add(Player11);
     }
     void resetStatistics(){
         attempted2PointsShot = 0;
@@ -225,9 +224,9 @@ public class HelloController {
 
     }
     void updateStatistics(){
-        twoPointersShotLabel.setText(String.valueOf(made2PointsShot) + "/" + String.valueOf(attempted2PointsShot));
-        threePointersShotLabel.setText(String.valueOf(made3PointsShot)+ "/" +String.valueOf(attempted3PointsShot));
-        freeThrowsLabel.setText(String.valueOf(madeFreeThrows)+ "/" +String.valueOf(attemptedFreeThrows));
+        twoPointersShotLabel.setText(made2PointsShot + "/" + attempted2PointsShot);
+        threePointersShotLabel.setText(made3PointsShot + "/" + attempted3PointsShot);
+        freeThrowsLabel.setText(madeFreeThrows + "/" + attemptedFreeThrows);
         assistsLabel.setText(String.valueOf(assists));
         offensiveReboundLabel.setText(String.valueOf(offensiveRebound));
         defensiveReboundLabel.setText(String.valueOf(defensiveRebound));
@@ -267,19 +266,6 @@ public class HelloController {
         }
     }
     void setButtons(){
-        ArrayList<Button> buttons = new ArrayList<>();
-        buttons.add(Player0);
-        buttons.add(Player1);
-        buttons.add(Player2);
-        buttons.add(Player3);
-        buttons.add(Player4);
-        buttons.add(Player5);
-        buttons.add(Player6);
-        buttons.add(Player7);
-        buttons.add(Player8);
-        buttons.add(Player9);
-        buttons.add(Player10);
-        buttons.add(Player11);
         for(Button button : buttons) {
             if(button.getText().equals("100")){
                 button.setVisible(false);
@@ -288,7 +274,7 @@ public class HelloController {
     }
 
     @FXML
-    void selectQuarter(ActionEvent event) {
+    void selectQuarter() {
         String quarter = quarterComboBox.getValue();
         if(quarter.equals("1 half") || quarter.equals("2 half") || quarter.equals("Game")){
             rightAnchorpane.setVisible(false);
@@ -403,17 +389,9 @@ public class HelloController {
     void madeFoul(){
         fouls++;
     }
-    void showNoQuarterSelectedAlert() {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("No Selection");
-        alert.setHeaderText("No Quarter Selected");
-        alert.setContentText("Please select a quarter.");
-        alert.showAndWait();
-    }
-
     // For buttons on the right side
     @FXML
-    void handleInsertActionClick(MouseEvent event) {
+    void handleInsertActionClick() {
         // If quarter not inserted, alert and return
         if(quarterComboBox.getValue() == null) {
             new Alert(Alert.AlertType.ERROR, "First you have to select the quarter").showAndWait();
@@ -538,140 +516,133 @@ public class HelloController {
 
 
 
-    @FXML
-    void handleClick(MouseEvent event) {
-        if(quarterComboBox.getValue() != null) {
-            x = event.getX();
-            y = event.getY();
-
-            Point point = new Point(x, y);
-
-            try {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("event-edit-view.fxml"));
-                DialogPane view = loader.load();
-                EventEditDialogController controller = loader.getController();
-
-                // Set the person into the controller.
-                //int selectedIndex = selectedIndex();
-                //controller.setPerson(new Person(personTable.getItems().get(selectedIndex)));
-
-                // Create the dialog
-                Dialog<ButtonType> dialog = new Dialog<>();
-                dialog.setTitle("Edit Event");
-                dialog.initModality(Modality.WINDOW_MODAL);
-                dialog.setDialogPane(view);
-
-                // Show the dialog and wait until the user closes it
-                Optional<ButtonType> clickedButton = dialog.showAndWait();
-                if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
-                    String eventType = controller.getStringFromSelectedButton();
-                    String quarter = quarterComboBox.getValue();
-                    String whoDidIt = controller.getStringFromTextField();
-                    // Nella nuova interfaccia, questo controllo non serve
-                    boolean isPresent = false;
-                    for(Player player : players){
-                        if(player.getPlayerNumber().equals(Integer.valueOf(whoDidIt))){
-                            isPresent = true;
-                        }
-                    }
-                    if(isPresent) {
-                        Point eventLocation = new Point(x, y);
-                        OurEvent ourEvent = new OurEvent(eventType, whoDidIt, quarter.substring(0, 1), x, y);
-                        /*System.out.println("Premuto il bottone ok");
-                        System.out.println(controller.getStringFromTextField());
-                        System.out.println(controller.getStringFromSelectedButton());*/
-                        ourEvents.add(ourEvent);
-                        for (OurEvent o : ourEvents) {
-                            System.out.print(o + " ;");
-                        }
-                        System.out.println();
-                        modifyStatistics(eventType, eventLocation);
-                        //Player mattia = new Player("Mattia","Montanari",12);
-                        //players.add(mattia);
-                        for (Player player : players) {
-                            if (player.getPlayerNumber().equals(Integer.valueOf(ourEvent.getWhoDidIt()))) {
-                                switch (eventType) {
-                                    case "Made Shot" -> {
-                                        if (calculateDistance(eventLocation, BASKET) < RADIUS) {
-                                            player.setAttemptedTwoPointers(player.getAttemptedTwoPointers() + 1);
-                                            player.setMadeTwoPointers(player.getMadeTwoPointers() + 1);
-                                        } else {
-                                            player.setAttemptedThreePointers(player.getAttemptedThreePointers() + 1);
-                                            player.setMadeThreePointers(player.getMadeThreePointers() + 1);
-                                        }
-                                    }
-                                    case "Missed Shot" -> {
-                                        if (calculateDistance(eventLocation, BASKET) < RADIUS) {
-                                            player.setAttemptedTwoPointers(player.getAttemptedTwoPointers() + 1);
-                                        } else {
-                                            player.setAttemptedThreePointers(player.getAttemptedThreePointers() + 1);
-                                        }
-                                    }
-                                    case "Made FreeThrows" -> {
-                                        player.setAttemptedFreeThrows(player.getAttemptedFreeThrows() + 1);
-                                        player.setMadeFreeThrows(player.getMadeFreeThrows() + 1);
-                                    }
-                                    case "Missed FreeThrows" -> player.setAttemptedFreeThrows(player.getAttemptedFreeThrows() + 1);
-                                    case "Defensive Rebound" -> player.setDefensiveRebounds(player.getDefensiveRebounds() + 1);
-                                    case "Offensive Rebound" -> player.setOffensiveRebounds(player.getOffensiveRebounds() + 1);
-                                    case "Assist" -> player.setAssists(player.getAssists() + 1);
-                                    case "Block" -> player.setBlocks(player.getBlocks() + 1);
-                                    case "Foul" -> player.setFouls(player.getFouls() + 1);
-                                    case "Turnover" -> player.setTurnOver(player.getTurnOver() + 1);
-                                    case "Steal" -> player.setSteals(player.getSteals() + 1);
-                                }
-                                //System.out.println(player.toString());
-                            }
-                        }
-                        updateStatistics();
-
-                        // For numbers on court
-                        drawNumbersIfRequired(ourEvent);
-
-
-
-                    }
-                    else{
-                        new Alert(Alert.AlertType.ERROR, "Player not in the team").showAndWait();
-                    }
-                }
-            } catch (NoSuchElementException e) {
-                //showNoQuarterSelectedAlert();
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-
-        /*
-        if(calculateDistance(point,BASKET) < RADIUS){
-            made2PShot();
-            updateStatistics();
-        }
-        */
-            points.add(point);
-            System.out.println("Mouse clicked at: (" + x + ", " + y + ")");
-            System.out.print(points.size() + ". ");
-            for (Point p : points) {
-                System.out.print(p + ", ");
-            }
-            System.out.println();
-            if (points.size() >= 5) {
-                double[] semicircleParams = calculateSemicircle(points);
-
-                double radius = semicircleParams[0];
-                double centerX = semicircleParams[1];
-                double centerY = semicircleParams[2];
-
-                System.out.println("Semicircle parameters:");
-                System.out.println("Radius: " + radius);
-                System.out.println("Center X: " + centerX);
-                System.out.println("Center Y: " + centerY);
-            }
-        }
-    }
+    //@FXML
+    //void handleClick(MouseEvent event) {
+    //    if(quarterComboBox.getValue() != null) {
+    //        x = event.getX();
+    //        y = event.getY();
+    //
+    //        Point point = new Point(x, y);
+    //
+    //        try {
+    //            FXMLLoader loader = new FXMLLoader();
+    //            loader.setLocation(getClass().getResource("event-edit-view.fxml"));
+    //            DialogPane view = loader.load();
+    //            EventEditDialogController controller = loader.getController();
+    //
+    //            // Set the person into the controller.
+    //            //int selectedIndex = selectedIndex();
+    //            //controller.setPerson(new Person(personTable.getItems().get(selectedIndex)));
+    //
+    //            // Create the dialog
+    //            Dialog<ButtonType> dialog = new Dialog<>();
+    //            dialog.setTitle("Edit Event");
+    //            dialog.initModality(Modality.WINDOW_MODAL);
+    //            dialog.setDialogPane(view);
+    //
+    //            // Show the dialog and wait until the user closes it
+    //            Optional<ButtonType> clickedButton = dialog.showAndWait();
+    //            if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
+    //                String eventType = controller.getStringFromSelectedButton();
+    //                String quarter = quarterComboBox.getValue();
+    //                String whoDidIt = controller.getStringFromTextField();
+    //                // Nella nuova interfaccia, questo controllo non serve
+    //                boolean isPresent = false;
+    //                for(Player player : players){
+    //                    if(player.getPlayerNumber().equals(Integer.valueOf(whoDidIt))){
+    //                        isPresent = true;
+    //                    }
+    //                }
+    //                if(isPresent) {
+    //                    Point eventLocation = new Point(x, y);
+    //                    OurEvent ourEvent = new OurEvent(eventType, whoDidIt, quarter.substring(0, 1), x, y);
+    //
+    //                    ourEvents.add(ourEvent);
+    //                    for (OurEvent o : ourEvents) {
+    //                        System.out.print(o + " ;");
+    //                    }
+    //                    System.out.println();
+    //                    modifyStatistics(eventType, eventLocation);
+    //                    //Player mattia = new Player("Mattia","Montanari",12);
+    //                    //players.add(mattia);
+    //                    for (Player player : players) {
+    //                        if (player.getPlayerNumber().equals(Integer.valueOf(ourEvent.getWhoDidIt()))) {
+    //                            switch (eventType) {
+    //                                case "Made Shot" -> {
+    //                                    if (calculateDistance(eventLocation, BASKET) < RADIUS) {
+    //                                        player.setAttemptedTwoPointers(player.getAttemptedTwoPointers() + 1);
+    //                                        player.setMadeTwoPointers(player.getMadeTwoPointers() + 1);
+    //                                    } else {
+    //                                        player.setAttemptedThreePointers(player.getAttemptedThreePointers() + 1);
+    //                                        player.setMadeThreePointers(player.getMadeThreePointers() + 1);
+    //                                    }
+    //                                }
+    //                                case "Missed Shot" -> {
+    //                                    if (calculateDistance(eventLocation, BASKET) < RADIUS) {
+    //                                        player.setAttemptedTwoPointers(player.getAttemptedTwoPointers() + 1);
+    //                                    } else {
+    //                                        player.setAttemptedThreePointers(player.getAttemptedThreePointers() + 1);
+    //                                    }
+    //                                }
+    //                                case "Made FreeThrows" -> {
+    //                                    player.setAttemptedFreeThrows(player.getAttemptedFreeThrows() + 1);
+    //                                    player.setMadeFreeThrows(player.getMadeFreeThrows() + 1);
+    //                                }
+    //                                case "Missed FreeThrows" -> player.setAttemptedFreeThrows(player.getAttemptedFreeThrows() + 1);
+    //                                case "Defensive Rebound" -> player.setDefensiveRebounds(player.getDefensiveRebounds() + 1);
+    //                                case "Offensive Rebound" -> player.setOffensiveRebounds(player.getOffensiveRebounds() + 1);
+    //                                case "Assist" -> player.setAssists(player.getAssists() + 1);
+    //                                case "Block" -> player.setBlocks(player.getBlocks() + 1);
+    //                                case "Foul" -> player.setFouls(player.getFouls() + 1);
+    //                                case "Turnover" -> player.setTurnOver(player.getTurnOver() + 1);
+    //                                case "Steal" -> player.setSteals(player.getSteals() + 1);
+    //                            }
+    //                        }
+    //                    }
+    //                    updateStatistics();
+    //                    // For numbers on court
+    //                    drawNumbersIfRequired(ourEvent);
+    //                }
+    //                else{
+    //                    new Alert(Alert.AlertType.ERROR, "Player not in the team").showAndWait();
+    //                }
+    //            }
+    //        } catch (NoSuchElementException e) {
+    //            //showNoQuarterSelectedAlert();
+    //            e.printStackTrace();
+    //        } catch (IOException e) {
+    //            e.printStackTrace();
+    //        }
+    //
+    //
+    //
+    //    /*
+    //    if(calculateDistance(point,BASKET) < RADIUS){
+    //        made2PShot();
+    //        updateStatistics();
+    //    }
+    //    */
+    //        points.add(point);
+    //        System.out.println("Mouse clicked at: (" + x + ", " + y + ")");
+    //        System.out.print(points.size() + ". ");
+    //        for (Point p : points) {
+    //            System.out.print(p + ", ");
+    //        }
+    //        System.out.println();
+    //        if (points.size() >= 5) {
+    //            double[] semicircleParams = calculateSemicircle(points);
+    //
+    //            double radius = semicircleParams[0];
+    //            double centerX = semicircleParams[1];
+    //            double centerY = semicircleParams[2];
+    //
+    //            System.out.println("Semicircle parameters:");
+    //            System.out.println("Radius: " + radius);
+    //            System.out.println("Center X: " + centerX);
+    //            System.out.println("Center Y: " + centerY);
+    //        }
+    //    }
+    //}
 
     void drawNumbersIfRequired(OurEvent ourEvent) {
         if(ourEvent.geteventType().equals("Made S") || ourEvent.geteventType().equals("Missed S")){
@@ -690,16 +661,16 @@ public class HelloController {
 
 
     @FXML
-    void handleNewGame(ActionEvent event) {
+    void handleNewGame() {
         points = new ArrayList<>();
-        ourEvents = new ArrayList<OurEvent>();
-        players = new LinkedList<Player>();
+        ourEvents = new ArrayList<>();
+        players = new LinkedList<>();
         resetStatistics();
         updateStatistics();
     }
 
     @FXML
-    void handleNewTeam(ActionEvent event) {
+    void handleNewTeam() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("team-insertion-view.fxml"));
@@ -719,32 +690,19 @@ public class HelloController {
             // Show the dialog and wait until the user closes it
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.FINISH){
-                players = controller.getListOfPlayers();
-                System.out.println(players);
-
-                //Metto i players nei rispettivi bottoni
-                int i=0;
-                ArrayList<Button> buttons = new ArrayList<>();
-                buttons.add(Player0);
-                buttons.add(Player1);
-                buttons.add(Player2);
-                buttons.add(Player3);
-                buttons.add(Player4);
-                buttons.add(Player5);
-                buttons.add(Player6);
-                buttons.add(Player7);
-                buttons.add(Player8);
-                buttons.add(Player9);
-                buttons.add(Player10);
-                buttons.add(Player11);
-                for(Player player : players) {
-                    Button iButton = buttons.get(i);
-                    iButton.setText(player.getPlayerNumber().toString());
-                    i++;
+                if(controller.getListOfPlayers().size() != controller.getNumberOfPlayersToAdd()){
+                    new Alert(Alert.AlertType.ERROR, "Wrong Number of Players Added").showAndWait();
+                }else {
+                    players = controller.getListOfPlayers();
+                    //Metto i players nei rispettivi bottoni
+                    int i=0;
+                    for(Player player : players) {
+                        Button iButton = buttons.get(i);
+                        iButton.setText(player.getPlayerNumber().toString());
+                        i++;
+                    }
+                    setButtons();
                 }
-                setButtons();
-
-
             }
 
         } catch (IOException e) {
@@ -754,7 +712,7 @@ public class HelloController {
     }
 
     @FXML
-    void handleOpenGame(ActionEvent event) {
+    void handleOpenGame() {
         try {
             FileChooser fileChooser = new FileChooser();
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
@@ -764,11 +722,8 @@ public class HelloController {
             if (file != null) {
                 ObjectMapper mapper = new ObjectMapper();
                 mapper.registerModule(new JavaTimeModule());
-                ArrayList<OurEvent> ourEventsTmp = mapper.readValue(file, new TypeReference<>() {});
-
-                ourEvents = ourEventsTmp;
-                ourEventsTmp = null;
-
+                ourEvents.clear();
+                ourEvents = mapper.readValue(file, new TypeReference<>() {});
             }
         } catch (IOException e) {
             new Alert(Alert.AlertType.ERROR, "Could not load data").showAndWait();
@@ -776,7 +731,7 @@ public class HelloController {
     }
 
     @FXML
-    void handleOpenTeam(ActionEvent event) {
+    void handleOpenTeam() {
         try {
             FileChooser fileChooser = new FileChooser();
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
@@ -796,19 +751,6 @@ public class HelloController {
 
                 //Metto i players nei rispettivi bottoni
                 int i=0;
-                ArrayList<Button> buttons = new ArrayList<>();
-                buttons.add(Player0);
-                buttons.add(Player1);
-                buttons.add(Player2);
-                buttons.add(Player3);
-                buttons.add(Player4);
-                buttons.add(Player5);
-                buttons.add(Player6);
-                buttons.add(Player7);
-                buttons.add(Player8);
-                buttons.add(Player9);
-                buttons.add(Player10);
-                buttons.add(Player11);
                 for(Player player : players) {
                     Button iButton = buttons.get(i);
                     iButton.setText(player.getPlayerNumber().toString());
@@ -824,7 +766,7 @@ public class HelloController {
 
 
     @FXML
-    private void handleSaveGameAsJson(ActionEvent event) {
+    private void handleSaveGameAsJson() {
         try {
             FileChooser fileChooser = new FileChooser();
             FileChooser.ExtensionFilter jsonFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
@@ -843,7 +785,7 @@ public class HelloController {
 
 
     @FXML
-    void handleSaveGameAsCsv(ActionEvent event) {
+    void handleSaveGameAsCsv() {
         System.out.println("appena prima del try");
         try {
             FileChooser fileChooser = new FileChooser();
@@ -879,7 +821,7 @@ public class HelloController {
     }
 
     @FXML
-    void handleSaveTeamAsJson(ActionEvent event) {
+    void handleSaveTeamAsJson() {
         try {
             FileChooser fileChooser = new FileChooser();
             FileChooser.ExtensionFilter jsonFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
@@ -896,11 +838,11 @@ public class HelloController {
         }
     }
     @FXML
-    void handleUndo(ActionEvent event) {
+    void handleUndo() {
         if(ourEvents.size() >= 1) {
             ourEvents.remove(ourEvents.size() - 1);
             resetStatistics();
-            selectQuarter(new ActionEvent());
+            selectQuarter();
         }
     }
 
@@ -955,7 +897,7 @@ public class HelloController {
 
 
 
-    public static double[] calculateSemicircle(ArrayList<Point> points) {
+    /*public static double[] calculateSemicircle(ArrayList<Point> points) {
         if (points.size() < 2) {
             throw new IllegalArgumentException("At least two points are required.");
         }
@@ -998,7 +940,7 @@ public class HelloController {
 
         return new double[]{radius, centerX, centerY};
     }
-
+    */
     public static double calculateDistance(Point p1, Point p2) {
         double dx = p2.getX() - p1.getX();
         double dy = p2.getY() - p1.getY();

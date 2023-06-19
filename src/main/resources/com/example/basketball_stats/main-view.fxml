@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="1048.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.basketball_stats.HelloController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="1048.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.basketball_stats.HelloController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -107,7 +107,7 @@
       </ScrollPane>
    </right>
    <center>
-      <AnchorPane fx:id="courtAnchorPane" prefHeight="484.0" prefWidth="302.0" styleClass="courtAnchorPane" stylesheets="@halfcourt-backgroung.css" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="484.0" prefWidth="302.0" styleClass="courtAnchorPane" stylesheets="@halfcourt-backgroung.css" BorderPane.alignment="CENTER">
          <children>
             <Canvas fx:id="canvasUponCourt" height="606.0" layoutX="1.0" layoutY="1.0" onMouseClicked="#handleClickUponCourt" width="653.0" />
          </children>
