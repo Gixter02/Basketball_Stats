@@ -109,6 +109,9 @@ public class HelloController {
     @FXML
     private Button Player9;
 
+    @FXML
+    private AnchorPane rightAnchorpane;
+
 
     // For numbers on court
     @FXML
@@ -132,6 +135,7 @@ public class HelloController {
 
     @FXML
     private Button missedShotButton;
+
 
     List<GraphicsContext> graphicsContextList;
     Color color;
@@ -183,7 +187,7 @@ public class HelloController {
     @FXML
     private void initialize() {
         // Get the list of items and add new items
-        quarterComboBox.getItems().addAll("1°Q","2°Q","3°Q","4°Q");
+        quarterComboBox.getItems().addAll("1°Q","2°Q","3°Q","4°Q", "1 half", "2 half", "Game");
         points = new ArrayList<>();
         ourEvents = new ArrayList<>();
         players = new LinkedList<Player>();
@@ -196,6 +200,7 @@ public class HelloController {
         missedShotButton.setStyle("-fx-background-color: #ff0000; -fx-text-fill: black;");
         madeFreeThrowButton.setStyle("-fx-background-color: #00ff00; -fx-text-fill: black;");
         madeShotButton.setStyle("-fx-background-color: #00ff00; -fx-text-fill: black;");
+
 
     }
     void resetStatistics(){
@@ -281,20 +286,66 @@ public class HelloController {
             }
         }
     }
+
     @FXML
     void selectQuarter(ActionEvent event) {
-        String quarter = quarterComboBox.getValue().substring(0,1);
-        resetStatistics();
-        for(OurEvent ourEvent : ourEvents){
-            if(ourEvent.getQuarter().equals(quarter)){
-                String eventType = ourEvent.geteventType();
-                Point eventLocation = new Point(ourEvent.getX(), ourEvent.getY());
-                modifyStatistics(eventType, eventLocation);
-                // For numbers on court
-                drawNumbersIfRequired(ourEvent);
+        String quarter = quarterComboBox.getValue();
+        if(quarter.equals("1 half") || quarter.equals("2 half") || quarter.equals("Game")){
+            rightAnchorpane.setVisible(false);
+            resetStatistics();
+            switch (quarter) {
+                case "1 half" -> {
+                    for(OurEvent ourEvent : ourEvents){
+                        if(ourEvent.getQuarter().equals("1") || ourEvent.getQuarter().equals("2")){
+                            String eventType = ourEvent.geteventType();
+                            Point eventLocation = new Point(ourEvent.getX(), ourEvent.getY());
+                            modifyStatistics(eventType, eventLocation);
+                            // For numbers on court
+                            drawNumbersIfRequired(ourEvent);
+                        }
+                    }
+                    updateStatistics();
+                }
+                case "2 half" -> {
+                    for(OurEvent ourEvent : ourEvents){
+                        if(ourEvent.getQuarter().equals("3") || ourEvent.getQuarter().equals("4")){
+                            String eventType = ourEvent.geteventType();
+                            Point eventLocation = new Point(ourEvent.getX(), ourEvent.getY());
+                            modifyStatistics(eventType, eventLocation);
+                            // For numbers on court
+                            drawNumbersIfRequired(ourEvent);
+                        }
+                    }
+                    updateStatistics();
+                }
+                case "Game" -> {
+                    for(OurEvent ourEvent : ourEvents){
+                        String eventType = ourEvent.geteventType();
+                        Point eventLocation = new Point(ourEvent.getX(), ourEvent.getY());
+                        modifyStatistics(eventType, eventLocation);
+                        // For numbers on court
+                        drawNumbersIfRequired(ourEvent);
+                    }
+                    updateStatistics();
+                }
+
             }
         }
-        updateStatistics();
+        else {
+            rightAnchorpane.setVisible(true);
+            quarter = quarter.substring(0,1);
+            resetStatistics();
+            for(OurEvent ourEvent : ourEvents){
+                if(ourEvent.getQuarter().equals(quarter)){
+                    String eventType = ourEvent.geteventType();
+                    Point eventLocation = new Point(ourEvent.getX(), ourEvent.getY());
+                    modifyStatistics(eventType, eventLocation);
+                    // For numbers on court
+                    drawNumbersIfRequired(ourEvent);
+                }
+            }
+            updateStatistics();
+        }
     }
 
 
