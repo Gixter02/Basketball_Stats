@@ -119,6 +119,18 @@ public class HelloController {
     private PieChart threePointersShotPieChart = new PieChart();
     @FXML
     private PieChart freeThrowsPieChart = new PieChart();
+    @FXML
+    private Button madeFreeThrowButton;
+
+    @FXML
+    private Button madeShotButton;
+
+    @FXML
+    private Button missedFreeThrowButton;
+
+    @FXML
+    private Button missedShotButton;
+
     List<GraphicsContext> graphicsContextList;
     Color color;
 
@@ -178,6 +190,10 @@ public class HelloController {
 
         // For numbers on court
         graphicsContextList = new ArrayList<>();
+        missedFreeThrowButton.setStyle("-fx-background-color: #ff0000; -fx-text-fill: black;");
+        missedShotButton.setStyle("-fx-background-color: #00ff00; -fx-text-fill: black;");
+        madeFreeThrowButton.setStyle("-fx-background-color: #ff0000; -fx-text-fill: black;");
+        madeShotButton.setStyle("-fx-background-color: #00ff00; -fx-text-fill: black;");
 
     }
     void resetStatistics(){

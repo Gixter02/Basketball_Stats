@@ -110,12 +110,12 @@
                   <Button fx:id="Player9" layoutX="14.0" layoutY="146.0" mnemonicParsing="false" onMouseClicked="#handlePlayerButtonClicked" prefHeight="24.0" prefWidth="46.0" text="100" />
                   <Button fx:id="Player10" layoutX="76.0" layoutY="146.0" mnemonicParsing="false" onMouseClicked="#handlePlayerButtonClicked" prefHeight="24.0" prefWidth="46.0" text="100" />
                   <Button fx:id="Player11" layoutX="138.0" layoutY="146.0" mnemonicParsing="false" onMouseClicked="#handlePlayerButtonClicked" prefHeight="24.0" prefWidth="46.0" text="100" />
-                  <Button layoutX="15.0" layoutY="245.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Made S" />
+                  <Button fx:id="madeShotButton" layoutX="15.0" layoutY="245.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Made S" />
                   <Label layoutX="14.0" layoutY="222.0" text="Shots" />
                   <Label layoutX="14.0" layoutY="322.0" text="Rebounds" />
-                  <Button layoutX="104.0" layoutY="245.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Missed S" />
-                  <Button layoutX="15.0" layoutY="278.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Made FT" />
-                  <Button layoutX="104.0" layoutY="278.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Missed FT" />
+                  <Button fx:id="missedShotButton" layoutX="104.0" layoutY="245.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Missed S" />
+                  <Button fx:id="madeFreeThrowButton" layoutX="15.0" layoutY="278.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Made FT" />
+                  <Button fx:id="missedFreeThrowButton" layoutX="104.0" layoutY="278.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Missed FT" />
                   <Label layoutX="16.0" layoutY="391.0" text="Other" />
                   <Button layoutX="15.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Off R" />
                   <Button layoutX="104.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#handleActionButtonClicked" text="Def R" />
