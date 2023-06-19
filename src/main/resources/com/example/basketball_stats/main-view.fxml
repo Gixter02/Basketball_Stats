@@ -50,43 +50,16 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Edit Player" />
-                  <MenuItem mnemonicParsing="false" text="Delete Player" />
+              <MenuItem mnemonicParsing="false" onAction="#handleUndo" text="Undo" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="View">
-               <items>
-                  <Menu mnemonicParsing="false" text="Team">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="1°Q" />
-                        <MenuItem mnemonicParsing="false" text="2°Q" />
-                        <MenuItem mnemonicParsing="false" text="3°Q" />
-                        <MenuItem mnemonicParsing="false" text="4°Q" />
-                        <MenuItem mnemonicParsing="false" text="1°Half" />
-                        <MenuItem mnemonicParsing="false" text="1°Half" />
-                        <MenuItem mnemonicParsing="false" text="Game" />
-                    </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="Player...">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="1°Q" />
-                        <MenuItem mnemonicParsing="false" text="2°Q" />
-                        <MenuItem mnemonicParsing="false" text="3°Q" />
-                        <MenuItem mnemonicParsing="false" text="4°Q" />
-                        <MenuItem mnemonicParsing="false" text="1°Half" />
-                        <MenuItem mnemonicParsing="false" text="1°Half" />
-                        <MenuItem mnemonicParsing="false" text="Game" />
-                     </items>
-                  </Menu>
-               </items>
-            </Menu>
         </menus>
       </MenuBar>
    </top>
    <right>
       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <AnchorPane fx:id="rightAnchorpane" prefHeight="604.0" prefWidth="198.0">
+            <AnchorPane fx:id="rightAnchorpane" prefHeight="604.0" prefWidth="177.0">
                <children>
                   <Label layoutX="14.0" layoutY="14.0" text="Players">
                      <font>
@@ -143,7 +116,7 @@
    <left>
       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <AnchorPane prefHeight="571.0" prefWidth="183.0">
+            <AnchorPane prefHeight="590.0" prefWidth="125.0">
                <children>
                   <ComboBox fx:id="quarterComboBox" layoutX="14.0" layoutY="27.0" onAction="#selectQuarter" />
                   <Label layoutX="14.0" layoutY="58.0" text="2P :" />
@@ -169,7 +142,7 @@
                   <Label fx:id="foulsLabel" layoutX="56.0" layoutY="286.0" text="Label" />
                   <PieChart fx:id="twoPointersShotPieChart" layoutY="295.0" prefHeight="121.0" prefWidth="169.0" title="2P" titleSide="LEFT" />
                   <PieChart fx:id="threePointersShotPieChart" layoutX="-2.0" layoutY="365.0" prefHeight="144.0" prefWidth="179.0" title="3P" titleSide="LEFT" />
-                  <PieChart fx:id="freeThrowsPieChart" layoutX="-2.0" layoutY="438.0" prefHeight="150.0" prefWidth="144.0" title="FT" titleSide="LEFT" />
+                  <PieChart fx:id="freeThrowsPieChart" layoutX="-2.0" layoutY="438.0" prefHeight="150.0" prefWidth="170.0" title="FT" titleSide="LEFT" />
                   <Label layoutX="124.0" layoutY="6.0" text="Points" />
                   <Label fx:id="pointsLabel" layoutX="137.0" layoutY="31.0" text="Label" />
                </children>

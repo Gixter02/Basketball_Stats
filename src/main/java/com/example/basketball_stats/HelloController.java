@@ -895,6 +895,14 @@ public class HelloController {
             new Alert(Alert.AlertType.ERROR, "Could not save data in json").showAndWait();
         }
     }
+    @FXML
+    void handleUndo(ActionEvent event) {
+        if(ourEvents.size() >= 1) {
+            ourEvents.remove(ourEvents.size() - 1);
+            resetStatistics();
+            selectQuarter(new ActionEvent());
+        }
+    }
 
 
 
