@@ -2,6 +2,7 @@ package com.example.basketball_stats;
 
 import com.example.basketball_stats.classes.Player;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -38,10 +39,14 @@ public class TeamInsertionDialogController {
     @FXML
     void handleAddPlayer() {
         if(numberOfPlayersAdded < numberOfPlayersToAdd) {
-            Player newPlayer = new Player(getFirstNameFromTextField(), getLastNameFromTextField(), Integer.valueOf(getNumberFromTextField()));
-            players.add(newPlayer);
-            numberOfPlayersAdded++;
-            updateNumberOfPlayersAdded(numberOfPlayersAdded);
+            if(getFirstNameFromTextField().matches("[a-zA-Z]+") && getLastNameFromTextField().matches("[a-zA-Z]+") && getNumberFromTextField().matches("[0-9]+")) {
+                Player newPlayer = new Player(getFirstNameFromTextField(), getLastNameFromTextField(), Integer.valueOf(getNumberFromTextField()));
+                players.add(newPlayer);
+                numberOfPlayersAdded++;
+                updateNumberOfPlayersAdded(numberOfPlayersAdded);
+            }else{
+                new Alert(Alert.AlertType.ERROR, "First and Last Name should only contain Letters, Number should only contain Numbers").showAndWait();
+            }
             resetTextFields();
         }
     }
