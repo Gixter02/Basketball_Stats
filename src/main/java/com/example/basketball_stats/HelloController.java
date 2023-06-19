@@ -243,6 +243,26 @@ public class HelloController {
             case "Steal" -> madeSteal();
         }
     }
+    void setButtons(){
+        ArrayList<Button> buttons = new ArrayList<>();
+        buttons.add(Player0);
+        buttons.add(Player1);
+        buttons.add(Player2);
+        buttons.add(Player3);
+        buttons.add(Player4);
+        buttons.add(Player5);
+        buttons.add(Player6);
+        buttons.add(Player7);
+        buttons.add(Player8);
+        buttons.add(Player9);
+        buttons.add(Player10);
+        buttons.add(Player11);
+        for(Button button : buttons) {
+            if(button.getText().equals("100")){
+                button.setVisible(false);
+            }
+        }
+    }
     @FXML
     void selectQuarter(ActionEvent event) {
         String quarter = quarterComboBox.getValue().substring(0,1);
@@ -653,7 +673,7 @@ public class HelloController {
                     iButton.setText(player.getPlayerNumber().toString());
                     i++;
                 }
-
+                setButtons();
 
 
             }
@@ -725,7 +745,7 @@ public class HelloController {
                     iButton.setText(player.getPlayerNumber().toString());
                     i++;
                 }
-
+                setButtons();
 
             }
         } catch (IOException e) {
