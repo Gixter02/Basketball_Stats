@@ -23,7 +23,7 @@
                   <ComboBox fx:id="numberOfPlayersToAddCombobox" layoutX="14.0" layoutY="221.0" onAction="#handleSelectedNumberOfPlayersToAdd" prefHeight="24.0" prefWidth="182.0" promptText="Number of players" />
                   <Label layoutX="14.0" layoutY="275.0" text="Player added :" />
                   <Label fx:id="numberOfPlayersAddedLabel" layoutX="92.0" layoutY="275.0" text="Label" />
-                  <Button fx:id="addPlayerButton" layoutX="254.0" layoutY="271.0" mnemonicParsing="false" onAction="#handleAddPlayer" text="Add player" />
+                  <Button layoutX="254.0" layoutY="271.0" mnemonicParsing="false" onAction="#handleAddPlayer" text="Add player" />
                </children>
             </AnchorPane>
          </children></AnchorPane>

@@ -1,7 +1,5 @@
 package com.example.basketball_stats.classes;
 
-import javafx.beans.property.IntegerProperty;
-
 import java.util.Objects;
 
 

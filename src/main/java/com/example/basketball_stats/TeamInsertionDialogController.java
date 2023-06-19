@@ -1,24 +1,15 @@
 package com.example.basketball_stats;
 
 import com.example.basketball_stats.classes.Player;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 
 import java.util.LinkedList;
 
 
 public class TeamInsertionDialogController {
-
-    @FXML
-    private Button addPlayerButton;
-
     @FXML
     private TextField firstNameTextfield;
 
@@ -45,7 +36,7 @@ public class TeamInsertionDialogController {
         numberOfPlayersAdded = 0;
     }
     @FXML
-    void handleAddPlayer(ActionEvent event) {
+    void handleAddPlayer() {
         if(numberOfPlayersAdded < numberOfPlayersToAdd) {
             Player newPlayer = new Player(getFirstNameFromTextField(), getLastNameFromTextField(), Integer.valueOf(getNumberFromTextField()));
             players.add(newPlayer);
@@ -55,7 +46,7 @@ public class TeamInsertionDialogController {
         }
     }
     @FXML
-    void handleSelectedNumberOfPlayersToAdd(ActionEvent event) {
+    void handleSelectedNumberOfPlayersToAdd() {
         numberOfPlayersToAdd= Integer.valueOf(numberOfPlayersToAddCombobox.getValue());
         updateNumberOfPlayersAdded(0);
     }
