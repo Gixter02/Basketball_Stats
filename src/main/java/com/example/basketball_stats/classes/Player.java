@@ -25,8 +25,35 @@ public class Player {
     private Integer minutesPlayed;
 
 
+    /**
+     * Empty constructor
+     */
+    public Player() {
+    }
 
-
+    /**
+     * From other Player
+     * @param other Other Player
+     */
+    public Player(Player other) {
+        this.firstName = other.getFirstName();
+        this.lastName = other.getLastName();
+        this.playerNumber = other.getPlayerNumber();
+        this.fouls = other.getFouls();
+        this.defensiveRebounds = other.getDefensiveRebounds();
+        this.offensiveRebounds = other.getOffensiveRebounds();
+        this.steals = other.getSteals();
+        this.turnOver = other.getTurnOver();
+        this.assists = other.getAssists();
+        this.blocks = other.getBlocks();
+        this.madeFreeThrows = other.getMadeFreeThrows();
+        this.attemptedFreeThrows = other.getAttemptedFreeThrows();
+        this.madeTwoPointers = other.getMadeTwoPointers();
+        this.attemptedTwoPointers = other.getAttemptedTwoPointers();
+        this.madeThreePointers = other.getMadeThreePointers();
+        this.attemptedThreePointers = other.getAttemptedThreePointers();
+        this.minutesPlayed = other.getMinutesPlayed();
+    }
 
 
     /**
@@ -51,6 +78,7 @@ public class Player {
         this.attemptedThreePointers = 0;
         this.minutesPlayed = 0;
     }
+
 
     public Player(String firstName, String lastName, Integer playerNumber) {
         this.firstName = firstName;

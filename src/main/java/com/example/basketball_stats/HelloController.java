@@ -3,6 +3,7 @@ package com.example.basketball_stats;
 import com.example.basketball_stats.classes.OurEvent;
 import com.example.basketball_stats.classes.Player;
 import com.example.basketball_stats.classes.Point;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import javafx.collections.FXCollections;
@@ -674,7 +675,12 @@ public class HelloController {
             if (file != null) {
                 ObjectMapper mapper = new ObjectMapper();
                 mapper.registerModule(new JavaTimeModule());
-                players = mapper.readValue(file, players.getClass());
+                LinkedList<Player> playersTmp = mapper.readValue(file, new TypeReference<>() {});
+
+                players = playersTmp;
+                playersTmp = null;
+
+                System.out.println(playersTmp);
                 System.out.println(players);
 
                 //mapper.registerModule(new JavaTimeModule());
@@ -682,6 +688,29 @@ public class HelloController {
                 ////personTable.getItems().addAll(persons);
                 ////players = new LinkedList<>(playersTmp);
                 //System.out.println(players);
+
+                //Metto i players nei rispettivi bottoni
+                int i=0;
+                ArrayList<Button> buttons = new ArrayList<>();
+                buttons.add(Player0);
+                buttons.add(Player1);
+                buttons.add(Player2);
+                buttons.add(Player3);
+                buttons.add(Player4);
+                buttons.add(Player5);
+                buttons.add(Player6);
+                buttons.add(Player7);
+                buttons.add(Player8);
+                buttons.add(Player9);
+                buttons.add(Player10);
+                buttons.add(Player11);
+                for(Player player : players) {
+                    Button iButton = buttons.get(i);
+                    iButton.setText(player.getPlayerNumber().toString());
+                    i++;
+                }
+
+
             }
         } catch (IOException e) {
             new Alert(Alert.AlertType.ERROR, "Could not load data").showAndWait();
