@@ -336,7 +336,7 @@ public class HelloController {
             return;
         }
         //If action is a 2 or 3 pointer shot but point on court is not selected, alert and return
-        if(point == null) {
+        if((eventType.equals("Made S") || eventType.equals("Missed S")) && (point == null)) {
             new Alert(Alert.AlertType.ERROR, "You have to choose a point on court before inserting a 2P or 3P shot").showAndWait();
             return;
         }
@@ -666,7 +666,24 @@ public class HelloController {
 
     @FXML
     void handleOpenGame(ActionEvent event) {
+        try {
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
+            fileChooser.getExtensionFilters().add(extFilter);
 
+            File file = fileChooser.showOpenDialog(null);
+            if (file != null) {
+                ObjectMapper mapper = new ObjectMapper();
+                mapper.registerModule(new JavaTimeModule());
+                ArrayList<OurEvent> ourEventsTmp = mapper.readValue(file, new TypeReference<>() {});
+
+                ourEvents = ourEventsTmp;
+                ourEventsTmp = null;
+
+            }
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, "Could not load data").showAndWait();
+        }
     }
 
     @FXML
@@ -687,12 +704,6 @@ public class HelloController {
 
                 System.out.println(playersTmp);
                 System.out.println(players);
-
-                //mapper.registerModule(new JavaTimeModule());
-                //players = mapper.readValue(file, players.getClass());
-                ////personTable.getItems().addAll(persons);
-                ////players = new LinkedList<>(playersTmp);
-                //System.out.println(players);
 
                 //Metto i players nei rispettivi bottoni
                 int i=0;

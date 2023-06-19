@@ -8,6 +8,12 @@ public class OurEvent {
     private double y;
 
     /**
+     * Empty constructor
+     */
+    public OurEvent() {
+    }
+
+    /**
      * Full constructor
      * @param eventType what
      * @param whoDidIt who

@@ -27,21 +27,21 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="Open">
                     <items>
-                      <MenuItem mnemonicParsing="false" onAction="#handleOpenGame" text="Open Game..." />
                         <MenuItem mnemonicParsing="false" onAction="#handleOpenTeam" text="Open Team..." />
+                      <MenuItem mnemonicParsing="false" onAction="#handleOpenGame" text="Open Game..." />
                     </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Save">
                     <items>
+                        <Menu mnemonicParsing="false" text="Team">
+                          <items>
+                              <MenuItem mnemonicParsing="false" onAction="#handleSaveTeamAsJson" text="Players list (.json)" />
+                          </items>
+                        </Menu>
                         <Menu mnemonicParsing="false" text="Game">
                           <items>
                             <MenuItem mnemonicParsing="false" onAction="#handleSaveGameAsJson" text="Game Statistics (.json)" />
                               <MenuItem mnemonicParsing="false" onAction="#handleSaveGameAsCsv" text="Team Statistics (.csv)" />
-                          </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Team">
-                          <items>
-                              <MenuItem mnemonicParsing="false" onAction="#handleSaveTeamAsJson" text="Players list (.json)" />
                           </items>
                         </Menu>
                     </items>
