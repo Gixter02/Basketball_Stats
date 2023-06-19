@@ -16,6 +16,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -191,8 +193,8 @@ public class HelloController {
         // For numbers on court
         graphicsContextList = new ArrayList<>();
         missedFreeThrowButton.setStyle("-fx-background-color: #ff0000; -fx-text-fill: black;");
-        missedShotButton.setStyle("-fx-background-color: #00ff00; -fx-text-fill: black;");
-        madeFreeThrowButton.setStyle("-fx-background-color: #ff0000; -fx-text-fill: black;");
+        missedShotButton.setStyle("-fx-background-color: #ff0000; -fx-text-fill: black;");
+        madeFreeThrowButton.setStyle("-fx-background-color: #00ff00; -fx-text-fill: black;");
         madeShotButton.setStyle("-fx-background-color: #00ff00; -fx-text-fill: black;");
 
     }
